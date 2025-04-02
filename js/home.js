@@ -1,1 +1,4 @@
-// Making a Form function
+// Enabling interactivity of journal entry form
+
+
+// Wishlist Enablement
