@@ -16,6 +16,7 @@
     <!-- Header -->
     <header>
         <a href="#main" id="skip">Skip to main content</a>
+        <h1>Video Game Journal</h1>
         <!-- navigation -->
         <nav>
             <ul>
@@ -24,93 +25,103 @@
                 <li><a href = "about.html">About Me</a></li>
             </ul>
         </nav>
-        <h1>Home Page</h1>
     </header>
     
     <main>
         <!-- Journal Entry Form -->
-        <section tabindex="0">
-            <!-- 
-            Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
-            Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
-            https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->
-            <!-- Might use bootstrap -->
-
-            <form>
-                <fieldset class="form-group">
-                  <legend>Input your Thoughts</legend>
-                  <!-- Video Game Information (Stuff that can be fetched to be populated) -->
-                  <p>
-                    <label for="videoGameTitleForm">Video Game Title</label>
-                    <input type="text" class="form-control" name="size" id="videoGameTitleForm" placeholder="Enter title"/>
-                  </p>
-                  <!-- Actual Journal Entry -->
-                    <!-- Overall Thoughts heading -->
+        <article id="guidelines">
+            <section tabindex="0" class="container">
+                <!-- 
+                Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
+                Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
+                https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->
+                <!-- Might use bootstrap -->
+    
+                <form>
                     <fieldset class="form-group">
-                        <p>
-                            <!-- Overall Thought Image & Caption -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" id="size_1" placeholder="small" />
-                        </p>
-                        <p>
-                            <!-- Overall Thought Heading -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" id="size_1" placeholder="small" />
-                        </p>
-                        <p>
-                            <!-- Overall Thoughts paragraph -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" placeholder="small" />
-                        </p>
+                      <legend>Input your Thoughts</legend>
+                      <!-- Video Game Information (Stuff that can be fetched to be populated) -->
+                      <p>
+                        <label for="videoGameTitleForm">Video Game Title</label>
+                        <input type="text" class="form-control" name="size" id="videoGameTitleForm" placeholder="Enter title"/>
+                      </p>
+                      <!-- Actual Journal Entry -->
+                        <!-- Overall Thoughts heading -->
+                        <fieldset class="form-group">
+                            <p>
+                                <!-- Image Address-->
+                                <label for="thoughtImageAddress">Image Address/URL </label>
+                                <input type="text" name="thoughtImage" id="thoughtImageAddress" placeholder="Image Address/URL" />
+                                <!-- Image Caption Input -->
+                                <label for="thoughtImageCaption">Image Caption</label>
+                                <input type="text" name="thoughtImageCaption" id="thoughtImageCaption" placeholder="small" />
+                            </p>
+                            <p>
+                                <!-- Overall Thought Heading -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" id="size_1" placeholder="small" />
+                            </p>
+                            <p>
+                                <!-- Overall Thoughts paragraph -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" placeholder="small" />
+                            </p>
+                        </fieldset>
+    
+                        <!-- Key Moment(s) -->
+                        <fieldset class="form-group">
+                            <p>
+                                <!-- Key Moment(s) Image & Caption -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" id="size_1" placeholder="small" />
+                            </p>
+                            <p>
+                                <!-- Key Moment(s) Heading -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" id="size_1" placeholder="small" />
+                            </p>
+                            <p>
+                                <!-- Key Moment(s) paragraph -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" placeholder="small" />
+                            </p>
+                        </fieldset>
+    
+                        <!-- Conclusion -->
+                        <fieldset class="form-group">
+                            <p>
+                                <!-- Conclusion Image & Caption -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" id="size_1" placeholder="small" />
+                            </p>
+                            <p>
+                                <!-- Conclusion Heading -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" id="size_1" placeholder="small" />
+                            </p>
+                            <p>
+                                <!-- Conclusion paragraph -->
+                                <label for="size_1">Small</label>
+                                <input type="text" name="size" placeholder="small" />
+                            </p>
+                        </fieldset>
+                        <!-- Select to choose tags? -->
                     </fieldset>
-
-                    <!-- Key Moment(s) -->
-                    <fieldset class="form-group">
-                        <p>
-                            <!-- Key Moment(s) Image & Caption -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" id="size_1" placeholder="small" />
-                        </p>
-                        <p>
-                            <!-- Key Moment(s) Heading -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" id="size_1" placeholder="small" />
-                        </p>
-                        <p>
-                            <!-- Key Moment(s) paragraph -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" placeholder="small" />
-                        </p>
-                    </fieldset>
-
-                    <!-- Conclusion -->
-                    <fieldset class="form-group">
-                        <p>
-                            <!-- Conclusion Image & Caption -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" id="size_1" placeholder="small" />
-                        </p>
-                        <p>
-                            <!-- Conclusion Heading -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" id="size_1" placeholder="small" />
-                        </p>
-                        <p>
-                            <!-- Conclusion paragraph -->
-                            <label for="size_1">Small</label>
-                            <input type="text" name="size" placeholder="small" />
-                        </p>
-                    </fieldset>
-                </fieldset>
-              </form>              
-        </section>
+                    <!-- Onclick, get form information and save it to local storage -->
+                    <input type="submit" id="formSubmit" value="Submit">
+                  </form>              
+            </section>
+         </article>
 
         <!-- Wishlist  -->
-        <section tabindex="0">
-            <!-- 
-            Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
-            -->
-        </section>
+        <article id="contribute">
+            <section tabindex="0" class="container" >
+                <!-- 
+                Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
+                -->
+                <h2>My Wishlist</h2>
+            </section>
+        </article>
     </main>
 
     <!-- Footer -->
