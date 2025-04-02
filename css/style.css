@@ -1,0 +1,7 @@
+/* Skip to main content */
+#skip{
+    opacity: 0;
+}
+#skip:focus{
+    opacity: 100;
+}
