@@ -25,7 +25,21 @@ const addMemoryButton = document.querySelector("#add-memory");
 // otherwise it uses defaultEntries.
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultGames;
 
+// Putting entry previews on the page based on what is in local storage
+const renderEntries = () => {
+    // Abstract example of what I'll need to do; will populate overviews page using innerhtml and grabbing info from each element in entryList 
 
+    sortedMemories.forEach((memory) => {
+        memoryContainer.innerHTML += `<div class="position-relative col-12 border border-secondary rounded my-3 p-3 bg-white">
+         <div class="d-flex">
+           <h3>${memory.title}</h3>
+           <small class="px-1 text-muted align-self-center">${formatDateForMemory(memory.date)}</small>
+         </div>
+       <button data-date="${memory.date}" class="close-button">Ⓧ</button>
+       <p>${memory.description}</p>
+       </div>`;
+      });
+}
 
 
 

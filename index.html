@@ -34,12 +34,15 @@
                 <!-- 
                 Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
                 Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
-                https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->
-                <!-- Might use bootstrap -->
-    
+                https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->    
                 <form>
                     <fieldset class="form-group">
                       <legend>Input your Thoughts</legend>
+                      <!-- User Names their journal entry -->
+                      <p>
+                        <label for="journalEntryName"> Name Here</label>
+                        <input type="text" class="form-control" name="size" id="journalEntryName" placeholder="Enter entry name"/>
+                      </p>
                       <!-- Video Game Information (Stuff that can be fetched to be populated) -->
                       <p>
                         <label for="videoGameTitleForm">Video Game Title</label>
@@ -54,7 +57,7 @@
                                 <input type="text" name="thoughtImage" id="thoughtImageAddress" placeholder="Image Address/URL" />
                                 <!-- Image Caption Input -->
                                 <label for="thoughtImageCaption">Image Caption</label>
-                                <input type="text" name="thoughtImageCaption" id="thoughtImageCaption" placeholder="small" />
+                                <input type="text" name="thoughtImageCaption" id="thoughtImageCaption" placeholder="Caption" />
                             </p>
                             <p>
                                 <!-- Overall Thought Heading -->
