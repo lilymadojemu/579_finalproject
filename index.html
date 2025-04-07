@@ -35,7 +35,7 @@
                 Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
                 Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
                 https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->    
-                <form>
+                <form action="https://formspree.io/f/mkgjglwv" method="POST">
                     <fieldset class="form-group">
                       <legend>Input your Thoughts</legend>
                       <!-- User Names their journal entry -->
@@ -49,20 +49,15 @@
                         <input type="text" class="form-control" name="size" id="videoGameTitleForm" placeholder="Enter title"/>
                       </p>
                       <!-- Actual Journal Entry -->
-                        <!-- Overall Thoughts heading -->
+                        <!-- Overall Thoughts -->
                         <fieldset class="form-group">
                             <p>
                                 <!-- Image Address-->
                                 <label for="thoughtImageAddress">Image Address/URL </label>
-                                <input type="text" name="thoughtImage" id="thoughtImageAddress" placeholder="Image Address/URL" />
+                                <input type="text" name="thoughtImage" id="thoughtImageId" placeholder="Image Address/URL" />
                                 <!-- Image Caption Input -->
                                 <label for="thoughtImageCaption">Image Caption</label>
-                                <input type="text" name="thoughtImageCaption" id="thoughtImageCaption" placeholder="Caption" />
-                            </p>
-                            <p>
-                                <!-- Overall Thought Heading -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" id="size_1" placeholder="small" />
+                                <input type="text" name="thoughtImageCaption" id="thoughtImageCaptionId" placeholder="Caption" />
                             </p>
                             <p>
                                 <!-- Overall Thoughts paragraph -->
@@ -73,20 +68,20 @@
     
                         <!-- Key Moment(s) -->
                         <fieldset class="form-group">
+                            <!-- key moments sections introductory text -->
                             <p>
                                 <!-- Key Moment(s) Image & Caption -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" id="size_1" placeholder="small" />
-                            </p>
-                            <p>
-                                <!-- Key Moment(s) Heading -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" id="size_1" placeholder="small" />
+                                <!-- Image Address-->
+                                <label for="keyImageAddress">Image Address/URL </label>
+                                <input type="text" name="keyImage" id="keyImageId" placeholder="Image Address/URL" />
+                                <!-- Image Caption Input -->
+                                <label for="keyImageCaption">Image Caption</label>
+                                <input type="text" name="keyImageCaption" id="keyImageCaptionId" placeholder="Caption"/>
                             </p>
                             <p>
                                 <!-- Key Moment(s) paragraph -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" placeholder="small" />
+                                <label for="keyParagraph">Key Moment Entry</label>
+                                <textarea name="keyParagraph" id="keyParagraphId"></textarea>
                             </p>
                         </fieldset>
     
@@ -94,23 +89,21 @@
                         <fieldset class="form-group">
                             <p>
                                 <!-- Conclusion Image & Caption -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" id="size_1" placeholder="small" />
-                            </p>
-                            <p>
-                                <!-- Conclusion Heading -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" id="size_1" placeholder="small" />
+                                <label for="conclusionImageAddress">Image Address/URL</label>
+                                <input type="text" name="conclusionImageAddress" id="conclusionImageAddressId" placeholder="Image Address/URL" />
+                                <!-- Image Caption Input -->
+                                <label for="conclusionImageCaption">Image Caption</label>
+                                <input type="text" name="conclusionImageCaption" id="conclusionImageCaptionId" placeholder="Caption"/>
                             </p>
                             <p>
                                 <!-- Conclusion paragraph -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" placeholder="small" />
+                                <label for="conclusionParagraph">Key Moment Entry</label>
+                                <textarea name="conclusionParagraph" id="conclusionParagraphId"></textarea>
                             </p>
                         </fieldset>
                         <!-- Select to choose tags? -->
                     </fieldset>
-                    <!-- Onclick, get form information and save it to local storage -->
+                    <!-- When clicked, get form information and save it to local storage -->
                     <input type="submit" id="formSubmit" value="Submit">
                   </form>              
             </section>
