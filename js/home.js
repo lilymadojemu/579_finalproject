@@ -4,9 +4,11 @@ document.querySelector("#year").innerHTML = new Date().getFullYear();
 // DOM Element Selectors
 // The Entire Journal Entry Form 
 const journalEntryForm = document.querySelector(".journalEntryForm")
-// Overall Thoughts Inputs
+// Introduction
 const entryNameInput = document.querySelector("#journalEntryName");
 const videoGameTitleInput = document.querySelector("#videoGameTitleForm");
+const dateEntryInput = document.querySelector("#dateEntryId")
+// Overall Thoughts Inputs
 const overallImgInput = document.querySelector("#thoughtImgId");
 const overallImgCaptionInput = document.querySelector("thoughtImgCaptionId");
 const overallParagraphInput = document.querySelector("#overallThoughtsParagraphId");
@@ -22,64 +24,121 @@ const conclusionParagraphInput = document.querySelector("#conclusionParagraphId"
 const selectedTags = document.querySelector("#entryTags");
 // Form Submit Button
 const formSubmitBtn = document.querySelector("#formSubmit")
+// Confirm Screen Area
+const confirmScreen = document.querySelector("#confirmScreen")
+
 
 
 // Journal Entry Form 
 // Enabling interactivity of journal entry form
-
 const entryConfirmed = () => {
     console.log('confirmed!');
-    // show the screen confirming entry has been saved, have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
+    // show the screen confirming entry has been saved
 
-    // hide form area
-    formSubmitBtn.classList.add('hidden');
+    // Hide form area
+    formSubmitBtn.classList.add("hidden");
+    // Reveal confirm screen
+    confirmScreen.classList.add("show");
+
+    // have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
+    confirmScreen.innerHTML = "<h3>Journal Entry Complete!</h3> <a><button></button></a> <a href='entriesOverview.html'><button></button></a> <a href='form'><button></button></a>"
+
 }
+
 // Capture form data and save it as an object to local storage
 // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
 
 function captureEntry() {
     console.log('Entry Captured!')
-    // determine if entry is valid or not
-    // if (!titleInput.value ||titleInput.value.includes(' ')) {
-    //     titleInput.classList.add('is-invalid');
-    //   }else {
-    //     titleInput.classList.remove('is-invalid');
-    //   };
-    //   if (!dateInput.value || memoryList.some(memory => memory.date === localizedDate)){
-    //     dateInput.classList.add('is-invalid');
-    //   } else{ 
-    //     dateInput.classList.remove('is-invalid');
-    //   };
-    //   if (!descriptionInput.value){
-    //     descriptionInput.classList.add('is-invalid');
-    //   } else{
-    //     descriptionInput.classList.remove('is-invalid');
-    // };
-    // If entry infomration is valid, create a new entry object, push it to entryList, and save it to localstorage
-    // if (titleInput.value && !titleInput.value.includes(' ') && dateInput.value && !memoryList.some(memory => memory.date === localizedDate) && descriptionInput.value) {
-    //     // Create a new entry if validation passes, this is what will be aved to localstorage
-    //     const newEntry = {
-    //       title: titleInput.value,
-    //       date: localizedDate,
-    //       description: descriptionInput.value
-    //     };
-    //     // Add the new entry to the entryList
-    //     entryList.push(newEntry);
+    // determine if journal entry is valid or not, img stuff not required, everything else is
+    // Validation CSS Bootstrap: https://getbootstrap.com/docs/5.0/forms/validation/
+
+    // Intro Validation
+    if (!entryNameInput.value) {
+        entryNameInput.classList.add("is-invalid'");
+    } else {
+        entryNameInput.classList.remove("is-invalid");
+    };
+    // See if localized value is needed
+    if (!dateInput.value){
+        dateInput.classList.add('is-invalid');
+      } else{ 
+        dateInput.classList.remove('is-invalid');
+      };
+
+    if (!videoGameTitleInput.value){
+        videoGameTitleInput.classList.add("is-invalid");
+    } else{ 
+        videoGameTitleInput.classList.remove("is-invalid");
+    };
+    // Overall Thoughts Validation
+    // If image address is valid or not....might be a better way to determine
+    if (overallImgInput.value.includes(" ")) {
+        overallImgInput.classList.add("is-invalid");
+    }
+    if (!overallParagraphInput.value){
+        overallParagraphInput.classList.add('is-invalid');
+    } else{
+        overallParagraphInput.classList.remove('is-invalid');
+    };
+    // Key Moments Validation
+    if (keyImgInput.value.includes(" ")) {
+        keyImgInput.classList.add("is-invalid");
+    }
+    if (!keyParagraphInput.value){
+        keyParagraphInput.classList.add("is-invalid");
+    } else{
+        keyParagraphInput.classList.remove("is-invalid");
+    };
+    // Conclusion Validation
+    if (conclusionImgInput.value.includes(" ")) {
+        overallImgInput.classList.add("is-invalid");
+    }
+    if (!conclusionParagraphInput.value){
+        conclusionParagraphInput.classList.add("is-invalid");
+    } else{
+        conclusionParagraphInput.classList.remove("is-invalid");
+    };
+
+    // If entry information is valid, create a new entry object, push it to entryList, and save it to localstorage
+
+    if (entryNameInput.value && videoGameTitleInput.value && dateInput.value && overallParagraphInput.value && keyParagraphInput.value && conclusionParagraphInput.value) {
+        // Create a new entry if validation passes, this is what will be saved to localstorage
+        const newEntry = {
+          entryTitle: entryNameInput.value,
+          videoGameName: videoGameTitleInput.value,
+          date: dateInput.value,
+        // Otherwise game cover?
+          overallImgAddress: overallImgInput.value || "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506",
+          overallImgCaptionInput: overallImgCaptionInput.value || "My Melody wears gothic theme, created in Japan",
+          overallParagraph: overallParagraphInput.value,
+          keyImgAddress: keyImgInput.value,
+          keyImgCaption: keyImgCaptionInput.value,
+          keyParagraph: keyParagraphInput.value,
+          conclusionImgAddress: conclusionImgInput.value,
+          conclusionImgCaption: conclusionImgCaptionInput.value,
+          conclusionParagraph: conclusionParagraphInput.value
+        };
+
+    // Add the new entry to the entryList
+    entryList.push(newEntry);
     
-    //     // Save the updated entryList to localStorage
-    //     localStorage.setItem('entry.list', JSON.stringify(entryList));
+    // Save the updated entryList to localStorage
+    localStorage.setItem("entry.list", JSON.stringify(entryList));
     
     //     // Clear all inputs (only after everything is valid)
     //     titleInput.value = '';
     //     dateInput.value = '';
     //     descriptionInput.value = '';
 
+    // selectedTags.addEventListener('change', (e)=>{
+    //     console.log('e.target.value');
+    // });
+
     entryConfirmed();
 }
 // In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
-document.querySelector('#formSubmit').addEventListener('click', captureEntry);
-
-
+formSubmitBtn.addEventListener('click', captureEntry);
 
 // Wishlist Enablement
 

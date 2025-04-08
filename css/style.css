@@ -14,7 +14,13 @@
 .hidden {
     display: none;
 }
-
+.show {
+    opacity: 100;
+}
+/* Form Confirm Screen */
+#confirmScreen {
+    opacity: 0;
+}
 /* footer design */
 footer {
     text-align: center;

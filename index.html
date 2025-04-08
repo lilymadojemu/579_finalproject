@@ -33,13 +33,15 @@
         <article id="guidelines">
             <section tabindex="0" class="container">
                 <!-- 
+
                 Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
+
                 Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
                 https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->    
+
                 <form id="journalEntryForm">
                     <fieldset class="form-group">
-                      <legend>Input your Thoughts</legend>
-
+                      <legend>Create Your Journal Entry</legend>
                       <!-- User Names their journal entry -->
                       <p>
                         <label for="journalEntryName"> Name Here</label>
@@ -50,9 +52,15 @@
                         <label for="videoGameTitleForm">Video Game Title</label>
                         <input type="text" class="form-control" name="size" id="videoGameTitleForm" placeholder="Enter title"/>
                       </p>
+                      <p>
+                        <label for="dateEntry">Date</label>
+                        <input type="text" class="form-control" name="dateEntry" id="dateEntryId" placeholder="Entry Date"/>
+                      </p>
                       <!-- Actual Journal Entry -->
                         <!-- Overall Thoughts -->
                         <fieldset class="form-group">
+                            <h3> Overall Thoughts</h3>
+
                             <p class="row">
                                 <!-- Image Address-->
                                 <label for="thoughtImg">Image Address/URL </label>
