@@ -1,4 +1,4 @@
-/* Skip to main content */
+/* Skip to main content Functionality*/
 #skip{
     opacity: 0;
 }
@@ -6,4 +6,12 @@
     opacity: 100;
 }
 
-#form
+/* Form Design */
+#formSubmit {
+    opacity: 100;
+}
+
+/* footer design */
+footer {
+    text-align: center;
+}

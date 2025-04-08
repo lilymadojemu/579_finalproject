@@ -1,3 +1,28 @@
+// Add year to the footer
+document.querySelector("#year").innerHTML = new Date().getFullYear();
+
+// DOM Element Selectors
+// The Entire Journal Entry Form 
+const journalEntryForm = document.querySelector(".journalEntryForm")
+// Overall Thoughts Inputs
+const entryNameInput = document.querySelector("#journalEntryName");
+const videoGameTitleInput = document.querySelector("#videoGameTitleForm");
+const overallImgInput = document.querySelector("#thoughtImgId");
+const overallImgCaptionInput = document.querySelector("thoughtImgCaptionId");
+const overallParagraphInput = document.querySelector("#overallThoughtsParagraphId");
+// Key Moments Inputs
+const keyImgInput = document.querySelector("#keyImgId");
+const keyImgCaptionInput = document.querySelector("#keyImgCaptionId");
+const keyParagraphInput = document.querySelector("#keyParagraphId");
+// Conclusion  Inputs
+const conclusionImgInput = document.querySelector("#conclusionImgId");
+const conclusionImgCaptionInput = document.querySelector("conclusionImgCaptionId");
+const conclusionParagraphInput = document.querySelector("#conclusionParagraphId");
+// Tags
+const selectedTags = document.querySelector("#entryTags");
+// Form Submit Button
+const formSubmitBtn = document.querySelector("#formSubmit")
+
 
 // Journal Entry Form 
 // Enabling interactivity of journal entry form
@@ -5,16 +30,29 @@
 // Capture form data and save it as an object to local storage
 // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
 
-const captureEntry= () => {
-    // Don't forget entry.list (localstorage) will be establish in this function!
+function captureEntry() {
     console.log('Entry Captured!')
+    // Saving to entry to local storage Don't forget entry.list (localstorage) will be establish in this function!
+
+
+    // Clearing form values after hitting submit
+    journalEntryForm.reset();
+
+    // show the screen confirming entry has been saved, have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
+    // hide form area
+    formSubmitBtn.classList.add('hidden');
+
 }
+// In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
+document.querySelector('#formSubmit').addEventListener('click', captureEntry);
+
+
+
+
+
 
 
 // Wishlist Enablement
-
-// In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
-document.querySelector('#formSubmit').addEventListener('click', captureEntry);
 
 // fetch https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad
 fetch('https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad')

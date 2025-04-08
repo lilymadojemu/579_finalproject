@@ -27,17 +27,19 @@
         </nav>
     </header>
     
-    <main>
+    <main id="main">
         <!-- Journal Entry Form -->
+        <!-- WAVE Errors -->
         <article id="guidelines">
             <section tabindex="0" class="container">
                 <!-- 
                 Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
                 Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
                 https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->    
-                <form action="https://formspree.io/f/mkgjglwv" method="POST">
+                <form id="journalEntryForm">
                     <fieldset class="form-group">
                       <legend>Input your Thoughts</legend>
+
                       <!-- User Names their journal entry -->
                       <p>
                         <label for="journalEntryName"> Name Here</label>
@@ -51,57 +53,73 @@
                       <!-- Actual Journal Entry -->
                         <!-- Overall Thoughts -->
                         <fieldset class="form-group">
-                            <p>
+                            <p class="row">
                                 <!-- Image Address-->
-                                <label for="thoughtImageAddress">Image Address/URL </label>
-                                <input type="text" name="thoughtImage" id="thoughtImageId" placeholder="Image Address/URL" />
+                                <label for="thoughtImg">Image Address/URL </label>
+                                <input type="text" class="form-control"  name="thoughtImg" id="thoughtImgId" placeholder="Image Address/URL" />
                                 <!-- Image Caption Input -->
-                                <label for="thoughtImageCaption">Image Caption</label>
-                                <input type="text" name="thoughtImageCaption" id="thoughtImageCaptionId" placeholder="Caption" />
+                                <label for="thoughtImgCaption">Image Caption</label>
+                                <input type="text" class="form-control"  name="thoughtImgCaption" id="thoughtImgCaptionId" placeholder="Caption" />
                             </p>
                             <p>
                                 <!-- Overall Thoughts paragraph -->
-                                <label for="size_1">Small</label>
-                                <input type="text" name="size" placeholder="small" />
+                                <label for="overallThoughtsParagraph">Overarching Thoughts</label>
+                                <textarea class="form-control" name="overallThoughtsParagraph" id="overallThoughtsParagraphId"></textarea>
                             </p>
                         </fieldset>
     
                         <!-- Key Moment(s) -->
                         <fieldset class="form-group">
+                            <h3> Key Moments</h3>
+                            <p> Let's talk about some of your favorite moments of the video game!</p>
+                            
                             <!-- key moments sections introductory text -->
-                            <p>
+                            <p  class="row">
                                 <!-- Key Moment(s) Image & Caption -->
                                 <!-- Image Address-->
-                                <label for="keyImageAddress">Image Address/URL </label>
-                                <input type="text" name="keyImage" id="keyImageId" placeholder="Image Address/URL" />
+                                <label for="keyImg">Image Address/URL </label>
+                                <input type="text" name="keyImg" id="keyImgId" placeholder="Image Address/URL" />
                                 <!-- Image Caption Input -->
-                                <label for="keyImageCaption">Image Caption</label>
-                                <input type="text" name="keyImageCaption" id="keyImageCaptionId" placeholder="Caption"/>
+                                <label for="keyImgCaption">Image Caption</label>
+                                <input type="text" name="keyImgCaption" id="keyImgCaptionId" placeholder="Caption"/>
                             </p>
                             <p>
                                 <!-- Key Moment(s) paragraph -->
                                 <label for="keyParagraph">Key Moment Entry</label>
-                                <textarea name="keyParagraph" id="keyParagraphId"></textarea>
+                                <textarea class="form-control" name="keyParagraph" id="keyParagraphId"></textarea>
                             </p>
                         </fieldset>
     
                         <!-- Conclusion -->
                         <fieldset class="form-group">
-                            <p>
+                            <h3> Conclusion</h2>
+                            <p> What are your final thoughts on this game?</p>
+
+                            <p class="row">
                                 <!-- Conclusion Image & Caption -->
-                                <label for="conclusionImageAddress">Image Address/URL</label>
-                                <input type="text" name="conclusionImageAddress" id="conclusionImageAddressId" placeholder="Image Address/URL" />
+                                <label for="conclusionImg">Image Address/URL</label>
+                                <input type="text" name="conclusionImg" id="conclusionImgId" placeholder="Image Address/URL" />
                                 <!-- Image Caption Input -->
                                 <label for="conclusionImageCaption">Image Caption</label>
-                                <input type="text" name="conclusionImageCaption" id="conclusionImageCaptionId" placeholder="Caption"/>
+                                <input type="text" name="conclusionImgCaption" id="conclusionImgCaptionId" placeholder="Caption"/>
                             </p>
                             <p>
                                 <!-- Conclusion paragraph -->
-                                <label for="conclusionParagraph">Key Moment Entry</label>
-                                <textarea name="conclusionParagraph" id="conclusionParagraphId"></textarea>
+                                <label for="conclusionParagraph">Concluding Thoughts</label>
+                                <textarea class="form-control" name="conclusionParagraph" id="conclusionParagraphId"></textarea>
                             </p>
                         </fieldset>
-                        <!-- Select to choose tags? -->
+                        <!-- Select to choose tags associated with this game -->
+                        <div class="form-group">
+                            <label for="entryTags">Tags</label>
+                            <select multiple class="form-control" id="entryTags">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                          </div>
                     </fieldset>
                     <!-- When clicked, get form information and save it to local storage -->
                     <input type="submit" id="formSubmit" value="Submit">
@@ -119,15 +137,12 @@
                 <!-- Search Games Area -->
                 <form id="search">
                     <input class="search-input" 
-                    
                     type="search" name="search" placeholder="Search for games"/>
                 </form>
                 <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
-                
                 <!-- Wishlisted Games Area -->
                 <h2>My Wishlist</h2>
-
-
+                <!-- Wishlist games container? -->
 
             </section>
         </article>
@@ -137,9 +152,11 @@
     <footer class="page-footer">
         <div class="container">
           <p>
-            ૮꒰ ˶• ༝ •˶꒱ა ♡
+            ૮꒰ ˶• ༝ •˶꒱ა 
             <br>
-            Created by <a href="https://www.linkedin.com/in/lilymadojemu/">Lily Madojemu</a>
+            Created by <a href="https://www.linkedin.com/in/lilymadojemu/">Lily Madojemu</a> 
+            <br>
+            ♡ <span id="year"></span> ♡
           </p>
     </footer>
 </body>
