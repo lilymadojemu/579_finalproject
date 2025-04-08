@@ -32,16 +32,45 @@ const formSubmitBtn = document.querySelector("#formSubmit")
 
 function captureEntry() {
     console.log('Entry Captured!')
-    // Saving to entry to local storage Don't forget entry.list (localstorage) will be establish in this function!
-
-
-    // Clearing form values after hitting submit
-    journalEntryForm.reset();
+    // determine if entry is valid or not
+    // if (!titleInput.value ||titleInput.value.includes(' ')) {
+    //     titleInput.classList.add('is-invalid');
+    //   }else {
+    //     titleInput.classList.remove('is-invalid');
+    //   };
+    //   if (!dateInput.value || memoryList.some(memory => memory.date === localizedDate)){
+    //     dateInput.classList.add('is-invalid');
+    //   } else{ 
+    //     dateInput.classList.remove('is-invalid');
+    //   };
+    //   if (!descriptionInput.value){
+    //     descriptionInput.classList.add('is-invalid');
+    //   } else{
+    //     descriptionInput.classList.remove('is-invalid');
+    // };
+    // If entry infomration is valid, create a new entry object, push it to entryList, and save it to localstorage
+    // if (titleInput.value && !titleInput.value.includes(' ') && dateInput.value && !memoryList.some(memory => memory.date === localizedDate) && descriptionInput.value) {
+    //     // Create a new entry if validation passes, this is what will be aved to localstorage
+    //     const newEntry = {
+    //       title: titleInput.value,
+    //       date: localizedDate,
+    //       description: descriptionInput.value
+    //     };
+    //     // Add the new entry to the entryList
+    //     entryList.push(newEntry);
+    
+    //     // Save the updated entryList to localStorage
+    //     localStorage.setItem('entry.list', JSON.stringify(entryList));
+    
+    //     // Clear all inputs (only after everything is valid)
+    //     titleInput.value = '';
+    //     dateInput.value = '';
+    //     descriptionInput.value = '';
 
     // show the screen confirming entry has been saved, have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
+
     // hide form area
     formSubmitBtn.classList.add('hidden');
-
 }
 // In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
 document.querySelector('#formSubmit').addEventListener('click', captureEntry);
