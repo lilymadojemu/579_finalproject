@@ -11,6 +11,10 @@
     opacity: 100;
 }
 
+.hidden {
+    display: none;
+}
+
 /* footer design */
 footer {
     text-align: center;
