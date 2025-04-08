@@ -27,6 +27,13 @@ const formSubmitBtn = document.querySelector("#formSubmit")
 // Journal Entry Form 
 // Enabling interactivity of journal entry form
 
+const entryConfirmed = () => {
+    console.log('confirmed!');
+    // show the screen confirming entry has been saved, have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
+
+    // hide form area
+    formSubmitBtn.classList.add('hidden');
+}
 // Capture form data and save it as an object to local storage
 // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
 
@@ -67,17 +74,10 @@ function captureEntry() {
     //     dateInput.value = '';
     //     descriptionInput.value = '';
 
-    // show the screen confirming entry has been saved, have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
-
-    // hide form area
-    formSubmitBtn.classList.add('hidden');
+    entryConfirmed();
 }
 // In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
 document.querySelector('#formSubmit').addEventListener('click', captureEntry);
-
-
-
-
 
 
 
