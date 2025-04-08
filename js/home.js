@@ -1,3 +1,37 @@
+const defaultEntries = [
+    {
+      videoGameName: 'Celeste',
+      entryTitle: '',
+      overallThoughtsImg:'',
+      overallThoughtsImgCaption:'',
+      overallThoughtsHeading:'',
+      overallThoughtsParagraph:'',
+      keyMomentImg:'',
+      keyMomentImgCaption:'',
+      keyMomentHeading:'',
+      keyMomentParagraph:'',
+      conclusionImg:'',
+      conclusionImgCaption:'',
+      conclusionHeading:'',
+      conclusionParagraph:''
+    },
+    {
+      videoGameName: 'Persona 3 Reload',
+      entryTitle: '',
+      overallThoughtsImg:'',
+      overallThoughtsImgCaption:'',
+      overallThoughtsHeading:'',
+      overallThoughtsParagraph:'',
+      keyMomentImg:'',
+      keyMomentImgCaption:'',
+      keyMomentHeading:'',
+      keyMomentParagraph:'',
+      conclusionImg:'',
+      conclusionImgCaption:'',
+      conclusionHeading:'',
+      conclusionParagraph:''
+    }
+];
 // Add year to the footer
 document.querySelector("#year").innerHTML = new Date().getFullYear();
 
@@ -22,12 +56,18 @@ const conclusionImgCaptionInput = document.querySelector("conclusionImgCaptionId
 const conclusionParagraphInput = document.querySelector("#conclusionParagraphId");
 // Tags
 const selectedTags = document.querySelector("#entryTags");
+// selectedTags.addEventListener('change', (e)=>{
+//     console.log('e.target.value');
+// });
+
 // Form Submit Button
 const formSubmitBtn = document.querySelector("#formSubmit")
 // Confirm Screen Area
 const confirmScreen = document.querySelector("#confirmScreen")
 
-
+// If localStorage has a 'memory.list' item, it uses that,
+// otherwise it uses defaultEntries.
+let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
 
 // Journal Entry Form 
 // Enabling interactivity of journal entry form
@@ -42,7 +82,6 @@ const entryConfirmed = () => {
 
     // have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
     confirmScreen.innerHTML = "<h3>Journal Entry Complete!</h3> <a><button></button></a> <a href='entriesOverview.html'><button></button></a> <a href='form'><button></button></a>"
-
 }
 
 // Capture form data and save it as an object to local storage
@@ -50,6 +89,7 @@ const entryConfirmed = () => {
 
 function captureEntry() {
     console.log('Entry Captured!')
+
     // determine if journal entry is valid or not, img stuff not required, everything else is
     // Validation CSS Bootstrap: https://getbootstrap.com/docs/5.0/forms/validation/
 
@@ -108,7 +148,7 @@ function captureEntry() {
           entryTitle: entryNameInput.value,
           videoGameName: videoGameTitleInput.value,
           date: dateInput.value,
-        // Otherwise game cover?
+            // Otherwise game cover?
           overallImgAddress: overallImgInput.value || "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506",
           overallImgCaptionInput: overallImgCaptionInput.value || "My Melody wears gothic theme, created in Japan",
           overallParagraph: overallParagraphInput.value,
@@ -117,26 +157,37 @@ function captureEntry() {
           keyParagraph: keyParagraphInput.value,
           conclusionImgAddress: conclusionImgInput.value,
           conclusionImgCaption: conclusionImgCaptionInput.value,
-          conclusionParagraph: conclusionParagraphInput.value
+          conclusionParagraph: conclusionParagraphInput.value,
+        //   idk if this will work
+          tags: selectedTags.value
         };
-
+    };
     // Add the new entry to the entryList
     entryList.push(newEntry);
     
     // Save the updated entryList to localStorage
     localStorage.setItem("entry.list", JSON.stringify(entryList));
     
-    //     // Clear all inputs (only after everything is valid)
-    //     titleInput.value = '';
-    //     dateInput.value = '';
-    //     descriptionInput.value = '';
+   // Clear all inputs (only after everything is valid)
+    entryNameInput.value = "";
+    videoGameName.value = "";
+    dateInput.value = "";
+    overallImgInput.value = "";
+    overallImgCaptionInput.value = "";
+    overallParagraphInput.value = "";
+    keyImgInput.value = "";
+    keyImgCaptionInput.value = "";
+    keyParagraphInput.value = "";
+    conclusionImgInput.value = "";
+    conclusionImgCaptionInput.value = "";
+    conclusionParagraphInput.value = "";
+    selectedTags.value = "";
+    console.log("entry done!")
 
-    // selectedTags.addEventListener('change', (e)=>{
-    //     console.log('e.target.value');
-    // });
-
+    // Move on to the entry confirmation screen
     entryConfirmed();
 }
+
 // In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
 formSubmitBtn.addEventListener('click', captureEntry);
 

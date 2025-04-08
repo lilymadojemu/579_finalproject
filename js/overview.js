@@ -81,6 +81,7 @@ const renderEntries = () => {
     const sortedEntries = memoryList.sort((a, b) => a.date - b.date);
     localStorage.setItem('memory.list', JSON.stringify(sortedEntries));
 
+    // Create the html structure of all entry previews
     sortedEntries.forEach((memory) => {
         entryContainer.innerHTML += 
         // update when know how/what information will be displayed
@@ -98,5 +99,8 @@ const renderEntries = () => {
        </div>`;
       });
 }
+// Selected Entry
+// How we know what entry was chosen to view information of? In a clean way
 
-// Filtering based on elements
+// Filtering based on tags
+
