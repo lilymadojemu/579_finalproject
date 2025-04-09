@@ -41,20 +41,33 @@
 
                 <form id="journalEntryForm">
                     <fieldset class="form-group">
-                      <legend>Create Your Journal Entry</legend>
+                      <h2><legend>Create Your Journal Entry</legend></h2>
                       <!-- User Names their journal entry -->
                       <p>
-                        <label for="journalEntryName"> Name Here</label>
-                        <input type="text" class="form-control" name="size" id="journalEntryName" placeholder="Enter entry name"/>
+                        <label for="journalEntryName"> Journal Entry Title</label>
+                        <input type="text" class="form-control" name="size" id="journalEntryName"/>
+                        <small class="form-text text-muted">Required, Enter the name of your journal entry here</small>
+                        <div class="invalid-feedback">
+                            Journal Entry Title is required
+                         </div>
+
                       </p>
                       <!-- Video Game Information (Stuff that can be fetched to be populated) -->
                       <p>
                         <label for="videoGameTitleForm">Video Game Title</label>
                         <input type="text" class="form-control" name="size" id="videoGameTitleForm" placeholder="Enter title"/>
+                        <small class="text-muted">Required</small>
+                        <div class="invalid-feedback">
+                            Game title is required
+                         </div>
                       </p>
                       <p>
                         <label for="dateEntry">Date</label>
-                        <input type="text" class="form-control" name="dateEntry" id="dateEntryId" placeholder="Entry Date"/>
+                        <input type="text" class="form-control" name="dateEntry" id="dateEntryId"/>
+                        <small class="text-muted">Required</small>
+                        <div class="invalid-feedback">
+                          Date is required
+                        </div>
                       </p>
                       <!-- Actual Journal Entry -->
                         <!-- Overall Thoughts -->
@@ -64,15 +77,27 @@
                             <p class="row">
                                 <!-- Image Address-->
                                 <label for="thoughtImg">Image Address/URL </label>
-                                <input type="text" class="form-control"  name="thoughtImg" id="thoughtImgId" placeholder="Image Address/URL" />
+                                <input type="text" class="form-control"  name="thoughtImg" id="thoughtImgId"/>
+                                <small class="text-muted">Optional, Img Address of picture representing your overall thoughts of your game</small>
+                                <div class="invalid-feedback">
+                                  Invalid Image Address
+                                </div>
+                                
                                 <!-- Image Caption Input -->
                                 <label for="thoughtImgCaption">Image Caption</label>
-                                <input type="text" class="form-control"  name="thoughtImgCaption" id="thoughtImgCaptionId" placeholder="Caption" />
+                                <input type="text" class="form-control" name="thoughtImgCaption" id="thoughtImgCaptionId"/>
+                                <small class="text-muted">Optional, Caption of provided image</small>
+\
                             </p>
                             <p>
                                 <!-- Overall Thoughts paragraph -->
                                 <label for="overallThoughtsParagraph">Overarching Thoughts</label>
                                 <textarea class="form-control" name="overallThoughtsParagraph" id="overallThoughtsParagraphId"></textarea>
+                                <small class="text-muted">Required</small>
+
+                                <div class="invalid-feedback">
+                                  Your overall thoughts is required.
+                                </div>
                             </p>
                         </fieldset>
     
@@ -87,9 +112,17 @@
                                 <!-- Image Address-->
                                 <label for="keyImg">Image Address/URL </label>
                                 <input type="text" name="keyImg" id="keyImgId" placeholder="Image Address/URL" />
+
+                                <small class="text-muted">Optional, Image Address/URL of picture representing a key moment of the video game</small>
+                                <div class="invalid-feedback">
+                                  Invalid Image Address
+                                </div>
+
                                 <!-- Image Caption Input -->
                                 <label for="keyImgCaption">Image Caption</label>
                                 <input type="text" name="keyImgCaption" id="keyImgCaptionId" placeholder="Caption"/>
+                                <small class="text-muted">Optional, Caption of provided image</small>
+
                             </p>
                             <p>
                                 <!-- Key Moment(s) paragraph -->
@@ -107,25 +140,36 @@
                                 <!-- Conclusion Image & Caption -->
                                 <label for="conclusionImg">Image Address/URL</label>
                                 <input type="text" name="conclusionImg" id="conclusionImgId" placeholder="Image Address/URL" />
+                                <small class="text-muted">Optional, Img Address of picture representing your concluding thoughts</small>
+                                <div class="invalid-feedback">
+                                  Invalid Image Address
+                                </div>
+
                                 <!-- Image Caption Input -->
                                 <label for="conclusionImageCaption">Image Caption</label>
-                                <input type="text" name="conclusionImgCaption" id="conclusionImgCaptionId" placeholder="Caption"/>
+                                <input type="text" name="conclusionImgCaption" id="conclusionImgCaptionId"/>
+                                <small class="text-muted">Optional, Caption of provided image</small>
                             </p>
                             <p>
                                 <!-- Conclusion paragraph -->
                                 <label for="conclusionParagraph">Concluding Thoughts</label>
                                 <textarea class="form-control" name="conclusionParagraph" id="conclusionParagraphId"></textarea>
+                                <small class="text-muted">Required</small>
+
+                                <div class="invalid-feedback">
+                                  Concluding Thoughts are required.
+                                </div>
                             </p>
                         </fieldset>
                         <!-- Select to choose tags associated with this game -->
                         <div class="form-group">
                             <label for="entryTags">Tags</label>
                             <select multiple class="form-control" id="entryTags">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                              <option>Played</option>
+                              <option>Did Not Finish</option>
+                              <option>Playing</option>
+                              <option>Watched</option>
+                              <option>Not Played</option>
                             </select>
                           </div>
                     </fieldset>
@@ -137,22 +181,24 @@
 
         <!-- Wishlist  -->
         <article id="contribute">
-            <section tabindex="0" class="container" >
-                <!-- 
-                Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
-                -->
+            <div id="wishlistContainer" class="wishlist-container">
+                <section tabindex="0" class="container" >
+                    <!-- 
+                    Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
+                    -->
 
-                <!-- Search Games Area -->
-                <form id="search">
-                    <input class="search-input" 
-                    type="search" name="search" placeholder="Search for games"/>
-                </form>
-                <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
-                <!-- Wishlisted Games Area -->
-                <h2>My Wishlist</h2>
-                <!-- Wishlist games container? -->
+                    <!-- Search Games Area -->
+                    <form id="search">
+                        <input class="search-input" 
+                        type="search" name="search" placeholder="Search for games"/>
+                    </form>
+                    <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
+                    <!-- Wishlisted Games Area -->
+                    <h2>My Wishlist</h2>
+                    <!-- Wishlist games container? -->
 
-            </section>
+                </section>
+            </div>
         </article>
     </main>
 

@@ -37,14 +37,14 @@ document.querySelector("#year").innerHTML = new Date().getFullYear();
 
 // DOM Element Selectors
 // The Entire Journal Entry Form 
-const journalEntryForm = document.querySelector(".journalEntryForm")
+const journalEntryForm = document.querySelector("#journalEntryForm")
 // Introduction
 const entryNameInput = document.querySelector("#journalEntryName");
 const videoGameTitleInput = document.querySelector("#videoGameTitleForm");
 const dateEntryInput = document.querySelector("#dateEntryId")
 // Overall Thoughts Inputs
 const overallImgInput = document.querySelector("#thoughtImgId");
-const overallImgCaptionInput = document.querySelector("thoughtImgCaptionId");
+const overallImgCaptionInput = document.querySelector("#thoughtImgCaptionId");
 const overallParagraphInput = document.querySelector("#overallThoughtsParagraphId");
 // Key Moments Inputs
 const keyImgInput = document.querySelector("#keyImgId");
@@ -52,7 +52,7 @@ const keyImgCaptionInput = document.querySelector("#keyImgCaptionId");
 const keyParagraphInput = document.querySelector("#keyParagraphId");
 // Conclusion  Inputs
 const conclusionImgInput = document.querySelector("#conclusionImgId");
-const conclusionImgCaptionInput = document.querySelector("conclusionImgCaptionId");
+const conclusionImgCaptionInput = document.querySelector("#conclusionImgCaptionId");
 const conclusionParagraphInput = document.querySelector("#conclusionParagraphId");
 // Tags
 const selectedTags = document.querySelector("#entryTags");
@@ -100,10 +100,10 @@ function captureEntry() {
         entryNameInput.classList.remove("is-invalid");
     };
     // See if localized value is needed
-    if (!dateInput.value){
-        dateInput.classList.add('is-invalid');
+    if (!dateEntryInput.value){
+        dateEntryInput.classList.add('is-invalid');
       } else{ 
-        dateInput.classList.remove('is-invalid');
+        dateEntryInput.classList.remove('is-invalid');
       };
 
     if (!videoGameTitleInput.value){
@@ -145,9 +145,10 @@ function captureEntry() {
     if (entryNameInput.value && videoGameTitleInput.value && dateInput.value && overallParagraphInput.value && keyParagraphInput.value && conclusionParagraphInput.value) {
         // Create a new entry if validation passes, this is what will be saved to localstorage
         const newEntry = {
+          id: Date.now(),
           entryTitle: entryNameInput.value,
           videoGameName: videoGameTitleInput.value,
-          date: dateInput.value,
+          date: dateEntryInput.value,
             // Otherwise game cover?
           overallImgAddress: overallImgInput.value || "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506",
           overallImgCaptionInput: overallImgCaptionInput.value || "My Melody wears gothic theme, created in Japan",
@@ -161,17 +162,17 @@ function captureEntry() {
         //   idk if this will work
           tags: selectedTags.value
         };
+        // Add the new entry to the entryList
+        entryList.push(newEntry);
+        
+        // Save the updated entryList to localStorage
+        localStorage.setItem("entry.list", JSON.stringify(entryList));
     };
-    // Add the new entry to the entryList
-    entryList.push(newEntry);
-    
-    // Save the updated entryList to localStorage
-    localStorage.setItem("entry.list", JSON.stringify(entryList));
     
    // Clear all inputs (only after everything is valid)
     entryNameInput.value = "";
     videoGameName.value = "";
-    dateInput.value = "";
+    dateEntryInput.value = "";
     overallImgInput.value = "";
     overallImgCaptionInput.value = "";
     overallParagraphInput.value = "";
