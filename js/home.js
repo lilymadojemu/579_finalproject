@@ -88,61 +88,98 @@ const entryConfirmed = () => {
 // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
 
 function captureEntry() {
-    console.log('Entry Captured!')
+    console.log('Starting Journal Entry Capture')
 
     // determine if journal entry is valid or not, img stuff not required, everything else is
     // Validation CSS Bootstrap: https://getbootstrap.com/docs/5.0/forms/validation/
 
     // Intro Validation
     if (!entryNameInput.value) {
-        entryNameInput.classList.add("is-invalid'");
+        entryNameInput.classList.add("is-invalid");
+        entryNameInput.classList.add("invalid-feedback");
+
     } else {
         entryNameInput.classList.remove("is-invalid");
+        entryNameInput.classList.remove("invalid-feedback");
     };
     // See if localized value is needed
     if (!dateEntryInput.value){
         dateEntryInput.classList.add('is-invalid');
+        dateEntryInput.classList.add("invalid-feedback");
       } else{ 
         dateEntryInput.classList.remove('is-invalid');
+        dateEntryInput.classList.remove("invalid-feedback");
+
       };
 
     if (!videoGameTitleInput.value){
         videoGameTitleInput.classList.add("is-invalid");
+        videoGameTitleInput.classList.add("invalid-feedback");
+
     } else{ 
         videoGameTitleInput.classList.remove("is-invalid");
+        videoGameTitleInput.classList.remove("invalid-feedback");
+
     };
     // Overall Thoughts Validation
     // If image address is valid or not....might be a better way to determine
     if (overallImgInput.value.includes(" ")) {
         overallImgInput.classList.add("is-invalid");
+        overallImgInput.classList.add("invalid-feedback");
+    } else {
+        overallImgInput.classList.remove("is-invalid");
+        overallImgInput.classList.remove("invalid-feedback");
     }
+
     if (!overallParagraphInput.value){
-        overallParagraphInput.classList.add('is-invalid');
+        overallParagraphInput.classList.add("is-invalid");
+        overallParagraphInput.classList.add("invalid-feedback");
+
     } else{
-        overallParagraphInput.classList.remove('is-invalid');
+        overallParagraphInput.classList.remove("is-invalid");
+        overallParagraphInput.classList.remove("invalid-feedback");
+
     };
     // Key Moments Validation
     if (keyImgInput.value.includes(" ")) {
         keyImgInput.classList.add("is-invalid");
+        keyImgInput.classList.add("invalid-feedback");
+    } else {
+        keyImgInput.classList.remove("is-invalid");
+        keyImgInput.classList.remove("invalid-feedback");
     }
+
     if (!keyParagraphInput.value){
         keyParagraphInput.classList.add("is-invalid");
+        keyParagraphInput.classList.add("invalid-feedback");
+
     } else{
         keyParagraphInput.classList.remove("is-invalid");
+        keyParagraphInput.classList.remove("invalid=feedback");
+
     };
     // Conclusion Validation
     if (conclusionImgInput.value.includes(" ")) {
         overallImgInput.classList.add("is-invalid");
+        overallImgInput.classList.add("invalid-feedback");
+
+    } else {
+        overallImgInput.classList.remove("is-invalid");
+        overallImgInput.classList.remove("invalid-feedback");
     }
     if (!conclusionParagraphInput.value){
         conclusionParagraphInput.classList.add("is-invalid");
+        conclusionParagraphInput.classList.add("invalid-feedback");
+
     } else{
         conclusionParagraphInput.classList.remove("is-invalid");
+        conclusionParagraphInput.classList.remove("invalid-feedback");
+
     };
 
     // If entry information is valid, create a new entry object, push it to entryList, and save it to localstorage
 
-    if (entryNameInput.value && videoGameTitleInput.value && dateInput.value && overallParagraphInput.value && keyParagraphInput.value && conclusionParagraphInput.value) {
+    if (entryNameInput.value && videoGameTitleInput.value && dateEntryInput.value && overallParagraphInput.value && keyParagraphInput.value && conclusionParagraphInput.value) {
         // Create a new entry if validation passes, this is what will be saved to localstorage
         const newEntry = {
           id: Date.now(),
@@ -162,36 +199,40 @@ function captureEntry() {
         //   idk if this will work
           tags: selectedTags.value
         };
+        console.log(newEntry)
         // Add the new entry to the entryList
         entryList.push(newEntry);
+        console.log(entryList)
         
         // Save the updated entryList to localStorage
         localStorage.setItem("entry.list", JSON.stringify(entryList));
+        // Clear all inputs (only after everything is valid)
+        entryNameInput.value = "";
+        videoGameTitleInput.value = "";
+        dateEntryInput.value = "";
+        overallImgInput.value = "";
+        overallImgCaptionInput.value = "";
+        overallParagraphInput.value = "";
+        keyImgInput.value = "";
+        keyImgCaptionInput.value = "";
+        keyParagraphInput.value = "";
+        conclusionImgInput.value = "";
+        conclusionImgCaptionInput.value = "";
+        conclusionParagraphInput.value = "";
+        // selectedTags.value = "";
+    
+        // Move on to the entry confirmation screen
+        console.log("Entry saved to localStorage!");
+        entryConfirmed();
+        }
     };
     
-   // Clear all inputs (only after everything is valid)
-    entryNameInput.value = "";
-    videoGameName.value = "";
-    dateEntryInput.value = "";
-    overallImgInput.value = "";
-    overallImgCaptionInput.value = "";
-    overallParagraphInput.value = "";
-    keyImgInput.value = "";
-    keyImgCaptionInput.value = "";
-    keyParagraphInput.value = "";
-    conclusionImgInput.value = "";
-    conclusionImgCaptionInput.value = "";
-    conclusionParagraphInput.value = "";
-    selectedTags.value = "";
-    console.log("entry done!")
-
-    // Move on to the entry confirmation screen
-    entryConfirmed();
-}
 
 // In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
-formSubmitBtn.addEventListener('click', captureEntry);
-
+formSubmitBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    captureEntry(e);
+  });
 // Wishlist Enablement
 
 // fetch https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad
