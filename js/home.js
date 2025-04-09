@@ -1,37 +1,43 @@
+
 const defaultEntries = [
     {
-      videoGameName: 'Celeste',
-      entryTitle: '',
-      overallThoughtsImg:'',
-      overallThoughtsImgCaption:'',
-      overallThoughtsHeading:'',
-      overallThoughtsParagraph:'',
-      keyMomentImg:'',
-      keyMomentImgCaption:'',
-      keyMomentHeading:'',
-      keyMomentParagraph:'',
-      conclusionImg:'',
-      conclusionImgCaption:'',
-      conclusionHeading:'',
-      conclusionParagraph:''
+        id: Date.now(),
+      videoGameName: "Celeste",
+      entryTitle: "",
+      overallThoughtsImg:"",
+      overallThoughtsImgCaption:"",
+      overallThoughtsHeading:"",
+      overallThoughtsParagraph:"",
+      keyMomentImg:"",
+      keyMomentImgCaption:"",
+      keyMomentHeading:"",
+      keyMomentParagraph:"",
+      conclusionImg:"",
+      conclusionImgCaption:"",
+      conclusionHeading:"",
+      conclusionParagraph:"",
+      tags: "Played"
     },
     {
-      videoGameName: 'Persona 3 Reload',
-      entryTitle: '',
-      overallThoughtsImg:'',
-      overallThoughtsImgCaption:'',
-      overallThoughtsHeading:'',
-      overallThoughtsParagraph:'',
-      keyMomentImg:'',
-      keyMomentImgCaption:'',
-      keyMomentHeading:'',
-      keyMomentParagraph:'',
-      conclusionImg:'',
-      conclusionImgCaption:'',
-      conclusionHeading:'',
-      conclusionParagraph:''
-    }
-];
+        id: Date.now(),
+      videoGameName: "Persona 3 Reload",
+      entryTitle: "",
+      overallThoughtsImg:"",
+      overallThoughtsImgCaption:"",
+      overallThoughtsHeading:"",
+      overallThoughtsParagraph:"",
+      keyMomentImg:"",
+      keyMomentImgCaption:"",
+      keyMomentHeading:"",
+      keyMomentParagraph:"",
+      conclusionImg:"",
+      conclusionImgCaption:"",
+      conclusionHeading:"",
+      conclusionParagraph:"",
+      tags: "Played"
+    }];
+
+
 // Add year to the footer
 document.querySelector("#year").innerHTML = new Date().getFullYear();
 
@@ -56,18 +62,15 @@ const conclusionImgCaptionInput = document.querySelector("#conclusionImgCaptionI
 const conclusionParagraphInput = document.querySelector("#conclusionParagraphId");
 // Tags
 const selectedTags = document.querySelector("#entryTags");
-// selectedTags.addEventListener('change', (e)=>{
-//     console.log('e.target.value');
-// });
-
 // Form Submit Button
 const formSubmitBtn = document.querySelector("#formSubmit")
 // Confirm Screen Area
-const confirmScreen = document.querySelector("#confirmScreen")
+const confirmScreen = document.querySelector("#entryConfirmScreen")
 
 // If localStorage has a 'memory.list' item, it uses that,
 // otherwise it uses defaultEntries.
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
+
 
 // Journal Entry Form 
 // Enabling interactivity of journal entry form
@@ -76,32 +79,44 @@ const entryConfirmed = () => {
     // show the screen confirming entry has been saved
 
     // Hide form area
-    formSubmitBtn.classList.add("hidden");
+    journalEntryForm.classList.add("hidden");
+
     // Reveal confirm screen
-    confirmScreen.classList.add("show");
+    confirmScreen.classList.remove("hidden");
+
 
     // have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
-    confirmScreen.innerHTML = "<h3>Journal Entry Complete!</h3> <a><button></button></a> <a href='entriesOverview.html'><button></button></a> <a href='form'><button></button></a>"
+    confirmScreen.innerHTML = 
+    ` <div class="container">
+        <h2>Journal Entry Complete!</h2> 
+
+        <a><button>View Your Current Journal Entry</button></a> 
+
+        <a href='entriesOverview.html'><button>View All Journal Entries</button></a> 
+
+        <a href='#journalEntryForm'><button>Create another journal entry</button></a>
+     </div>
+    `
 }
 
-// Capture form data and save it as an object to local storage
-// https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
-function checkImage(url) {
-    var request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.send();
-    request.onload = function() {
-      status = request.status;
-      if (request.status == 200) //if(statusText == OK)
-      {
-        console.log("image exists");
-      } else {
-        console.log("image doesn't exist");
-      }
-    }
-  };
+// // Capture form data and save it as an object to local storage
+// // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
+// function checkImage(url) {
+//     var request = new XMLHttpRequest();
+//     request.open("GET", url, true);
+//     request.send();
+//     request.onload = function() {
+//       status = request.status;
+//       if (request.status == 200) //if(statusText == OK)
+//       {
+//         console.log("image exists");
+//       } else {
+//         console.log("image doesn't exist");
+//       }
+//     }
+//   };
 
-  
+
 function captureEntry() {
     console.log('Starting Journal Entry Capture')
 
@@ -180,7 +195,8 @@ function captureEntry() {
     dateEntryInput.value &&
     overallParagraphInput.value &&
     keyParagraphInput.value &&
-    conclusionParagraphInput.value;
+    conclusionParagraphInput.value &&
+    selectedTags.value;
 
     if (isValid) {
         // Create a new entry if validation passes, this is what will be saved to localstorage
@@ -189,9 +205,8 @@ function captureEntry() {
           entryTitle: entryNameInput.value,
           videoGameName: videoGameTitleInput.value,
           date: dateEntryInput.value,
-            // Otherwise game cover?
-          overallImgAddress: overallImgInput.value || "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506",
-          overallImgCaptionInput: overallImgCaptionInput.value || "My Melody wears gothic theme, created in Japan",
+          overallImgAddress: overallImgInput.value,
+          overallImgCaptionInput: overallImgCaptionInput.value,
           overallParagraph: overallParagraphInput.value,
           keyImgAddress: keyImgInput.value,
           keyImgCaption: keyImgCaptionInput.value,
@@ -199,7 +214,6 @@ function captureEntry() {
           conclusionImgAddress: conclusionImgInput.value,
           conclusionImgCaption: conclusionImgCaptionInput.value,
           conclusionParagraph: conclusionParagraphInput.value,
-        //   idk if this will work
           tags: selectedTags.value
         };
         console.log(newEntry)
@@ -222,20 +236,20 @@ function captureEntry() {
         conclusionImgInput.value = "";
         conclusionImgCaptionInput.value = "";
         conclusionParagraphInput.value = "";
-        // selectedTags.value = "";
-    
+        selectedTags.value = "";
         // Move on to the entry confirmation screen
         console.log("Entry saved to localStorage!");
         entryConfirmed();
         }
     };
-    
 
 // In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
 formSubmitBtn.addEventListener('click', function(e) {
     e.preventDefault();
     captureEntry(e);
   });
+
+
 // Wishlist Enablement
 
 // fetch https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad
