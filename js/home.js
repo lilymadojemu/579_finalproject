@@ -86,7 +86,22 @@ const entryConfirmed = () => {
 
 // Capture form data and save it as an object to local storage
 // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
+function checkImage(url) {
+    var request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.send();
+    request.onload = function() {
+      status = request.status;
+      if (request.status == 200) //if(statusText == OK)
+      {
+        console.log("image exists");
+      } else {
+        console.log("image doesn't exist");
+      }
+    }
+  };
 
+  
 function captureEntry() {
     console.log('Starting Journal Entry Capture')
 
@@ -96,90 +111,78 @@ function captureEntry() {
     // Intro Validation
     if (!entryNameInput.value) {
         entryNameInput.classList.add("is-invalid");
-        entryNameInput.classList.add("invalid-feedback");
 
     } else {
         entryNameInput.classList.remove("is-invalid");
-        entryNameInput.classList.remove("invalid-feedback");
     };
     // See if localized value is needed
     if (!dateEntryInput.value){
         dateEntryInput.classList.add('is-invalid');
-        dateEntryInput.classList.add("invalid-feedback");
       } else{ 
         dateEntryInput.classList.remove('is-invalid');
-        dateEntryInput.classList.remove("invalid-feedback");
 
       };
 
     if (!videoGameTitleInput.value){
         videoGameTitleInput.classList.add("is-invalid");
-        videoGameTitleInput.classList.add("invalid-feedback");
 
     } else{ 
         videoGameTitleInput.classList.remove("is-invalid");
-        videoGameTitleInput.classList.remove("invalid-feedback");
 
     };
     // Overall Thoughts Validation
     // If image address is valid or not....might be a better way to determine
     if (overallImgInput.value.includes(" ")) {
         overallImgInput.classList.add("is-invalid");
-        overallImgInput.classList.add("invalid-feedback");
     } else {
         overallImgInput.classList.remove("is-invalid");
-        overallImgInput.classList.remove("invalid-feedback");
     }
 
     if (!overallParagraphInput.value){
         overallParagraphInput.classList.add("is-invalid");
-        overallParagraphInput.classList.add("invalid-feedback");
 
     } else{
         overallParagraphInput.classList.remove("is-invalid");
-        overallParagraphInput.classList.remove("invalid-feedback");
 
     };
     // Key Moments Validation
     if (keyImgInput.value.includes(" ")) {
         keyImgInput.classList.add("is-invalid");
-        keyImgInput.classList.add("invalid-feedback");
     } else {
         keyImgInput.classList.remove("is-invalid");
-        keyImgInput.classList.remove("invalid-feedback");
     }
 
     if (!keyParagraphInput.value){
         keyParagraphInput.classList.add("is-invalid");
-        keyParagraphInput.classList.add("invalid-feedback");
 
     } else{
         keyParagraphInput.classList.remove("is-invalid");
-        keyParagraphInput.classList.remove("invalid=feedback");
 
     };
     // Conclusion Validation
     if (conclusionImgInput.value.includes(" ")) {
         overallImgInput.classList.add("is-invalid");
-        overallImgInput.classList.add("invalid-feedback");
 
     } else {
         overallImgInput.classList.remove("is-invalid");
-        overallImgInput.classList.remove("invalid-feedback");
     }
     if (!conclusionParagraphInput.value){
         conclusionParagraphInput.classList.add("is-invalid");
-        conclusionParagraphInput.classList.add("invalid-feedback");
 
     } else{
         conclusionParagraphInput.classList.remove("is-invalid");
-        conclusionParagraphInput.classList.remove("invalid-feedback");
-
     };
 
     // If entry information is valid, create a new entry object, push it to entryList, and save it to localstorage
+    const isValid =
+    entryNameInput.value &&
+    videoGameTitleInput.value &&
+    dateEntryInput.value &&
+    overallParagraphInput.value &&
+    keyParagraphInput.value &&
+    conclusionParagraphInput.value;
 
-    if (entryNameInput.value && videoGameTitleInput.value && dateEntryInput.value && overallParagraphInput.value && keyParagraphInput.value && conclusionParagraphInput.value) {
+    if (isValid) {
         // Create a new entry if validation passes, this is what will be saved to localstorage
         const newEntry = {
           id: Date.now(),
