@@ -11,7 +11,7 @@ const journalEntry = document.querySelector("#entryContainer")
  * Renders the memory list. Should be called on initial load
  * and anytime the memory list changes.
  */
-
+   
 const renderEntry = () => {
     journalEntry.innerHTML="";
 

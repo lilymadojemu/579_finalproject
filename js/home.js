@@ -87,15 +87,14 @@ const entryConfirmed = () => {
 
     // have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
     confirmScreen.innerHTML = 
-    ` <div class="container">
+    ` 
         <h2>Journal Entry Complete!</h2> 
 
         <a><button>View Your Current Journal Entry</button></a> 
 
         <a href='entriesOverview.html'><button>View All Journal Entries</button></a> 
 
-        <a href='#journalEntryForm'><button>Create another journal entry</button></a>
-     </div>
+        <a onClick=location.reload()><button>Create another journal entry</button></a>
     `
 }
 

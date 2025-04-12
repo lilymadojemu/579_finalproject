@@ -18,10 +18,27 @@
     opacity: 100;
 }
 /* Form Confirm Screen */
-#confirmScreen {
-    opacity: 0;
+#entryConfirmScreen {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1 fr;
+    text-align: center;
+    
 }
+#entryConfirmScreen .container {
+    grid-column: 2;
+}
+
+/* Will Further update to have same stylings as nav buttons */
+
+#entryConfirmScreen button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 2%;
+    background-color: rgb(254, 212, 213);
+}
+
 /* footer design */
 footer {
     text-align: center;
 }
+
