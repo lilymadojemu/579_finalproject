@@ -72,8 +72,7 @@ const confirmScreen = document.querySelector("#entryConfirmScreen")
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
 
 
-// Journal Entry Form 
-// Enabling interactivity of journal entry form
+// show the screen confirming entry has been saved
 const entryConfirmed = () => {
     console.log('confirmed!');
     // show the screen confirming entry has been saved
@@ -83,14 +82,16 @@ const entryConfirmed = () => {
 
     // Reveal confirm screen
     confirmScreen.classList.remove("hidden");
-
+    // Getting the information of the entry the user just submitted
+    const entryList = JSON.parse(localStorage.getItem('entry.list'));
+    const lastEntry = entryList[entryList.length - 1];
 
     // have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
     confirmScreen.innerHTML = 
     ` 
         <h2>Journal Entry Complete!</h2> 
 
-        <a><button>View Your Current Journal Entry</button></a> 
+        <a href='entry.html?id=${lastEntry.id}'><button>View Your Current Journal Entry</button></a> 
 
         <a href='entriesOverview.html'><button>View All Journal Entries</button></a> 
 
@@ -115,7 +116,8 @@ const entryConfirmed = () => {
 //     }
 //   };
 
-
+// Journal Entry Form 
+// Enabling interactivity of journal entry form
 function captureEntry() {
     console.log('Starting Journal Entry Capture')
 
