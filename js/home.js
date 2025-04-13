@@ -71,7 +71,6 @@ const confirmScreen = document.querySelector("#entryConfirmScreen")
 // otherwise it uses defaultEntries.
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
 
-
 // show the screen confirming entry has been saved
 const entryConfirmed = () => {
     console.log('confirmed!');
@@ -99,26 +98,20 @@ const entryConfirmed = () => {
     `
 }
 
-// // Capture form data and save it as an object to local storage
-// // https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage
-// function checkImage(url) {
-//     var request = new XMLHttpRequest();
-//     request.open("GET", url, true);
-//     request.send();
-//     request.onload = function() {
-//       status = request.status;
-//       if (request.status == 200) //if(statusText == OK)
-//       {
-//         console.log("image exists");
-//       } else {
-//         console.log("image doesn't exist");
-//       }
-//     }
-//   };
+
+function checkImage(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false); // resolve false instead of reject to avoid try/catch
+      img.src = url;
+    });
+};
 
 // Journal Entry Form 
-// Enabling interactivity of journal entry form
-function captureEntry() {
+// Capture form data and save it as an object to local storage
+
+async function captureEntry() {
     console.log('Starting Journal Entry Capture')
 
     // determine if journal entry is valid or not, img stuff not required, everything else is
@@ -148,11 +141,13 @@ function captureEntry() {
     };
     // Overall Thoughts Validation
     // If image address is valid or not....might be a better way to determine
-    if (overallImgInput.value.includes(" ")) {
-        overallImgInput.classList.add("is-invalid");
+    const overallImgIsValid = await checkImage(overallImgInput.value);
+    if (!overallImgIsValid && overallImgInput.value) {
+      overallImgInput.classList.add("is-invalid");
     } else {
-        overallImgInput.classList.remove("is-invalid");
+      overallImgInput.classList.remove("is-invalid");
     }
+  
 
     if (!overallParagraphInput.value){
         overallParagraphInput.classList.add("is-invalid");
@@ -162,7 +157,8 @@ function captureEntry() {
 
     };
     // Key Moments Validation
-    if (keyImgInput.value.includes(" ")) {
+    const keyImgIsValid = await checkImage(keyImgInput.value);
+    if (!keyImgIsValid && keyImgInput.value)  {
         keyImgInput.classList.add("is-invalid");
     } else {
         keyImgInput.classList.remove("is-invalid");
@@ -176,11 +172,12 @@ function captureEntry() {
 
     };
     // Conclusion Validation
-    if (conclusionImgInput.value.includes(" ")) {
-        overallImgInput.classList.add("is-invalid");
+    const conclusionImgIsValid = await checkImage(conclusionImgInput.value);
+    if (!conclusionImgIsValid && conclusionImgInput.value)  {
+        conclusionImgInput.classList.add("is-invalid");
 
     } else {
-        overallImgInput.classList.remove("is-invalid");
+        conclusionImgInput.classList.remove("is-invalid");
     }
     if (!conclusionParagraphInput.value){
         conclusionParagraphInput.classList.add("is-invalid");
@@ -197,6 +194,9 @@ function captureEntry() {
     overallParagraphInput.value &&
     keyParagraphInput.value &&
     conclusionParagraphInput.value &&
+    (overallImgInput.value ? overallImgIsValid : true) &&
+    (keyImgInput.value ? keyImgIsValid : true) &&
+    (conclusionImgInput.value ? conclusionImgIsValid : true) &&
     selectedTags.value;
 
     if (isValid) {
