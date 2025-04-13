@@ -1,9 +1,53 @@
+
+const defaultEntries = [
+  {
+    id: Date.now(),
+    videoGameName: "Celeste",
+    entryTitle: "",
+    date: "April 19th, 2025",
+    overallThoughtsImg:"",
+    overallThoughtsImgCaption:"",
+    overallThoughtsParagraph:"",
+    keyMomentImg:"",
+    keyMomentImgCaption:"",
+    keyMomentHeading:"",
+    keyMomentParagraph:"",
+    conclusionImg:"",
+    conclusionImgCaption:"",
+    conclusionHeading:"",
+    conclusionParagraph:"",
+    tags: "Played"
+  },
+  {
+    id: Date.now() + 1,
+    videoGameName: "Persona 3 Reload",
+    entryTitle: "",
+    date: "February 2nd, 2024",
+    overallThoughtsImg:"",
+    overallThoughtsImgCaption:"",
+    overallThoughtsHeading:"",
+    overallThoughtsParagraph:"",
+    keyMomentImg:"",
+    keyMomentImgCaption:"",
+    keyMomentHeading:"",
+    keyMomentParagraph:"",
+    conclusionImg:"",
+    conclusionImgCaption:"",
+    conclusionHeading:"",
+    conclusionParagraph:"",
+    tags: "Played"
+  }];
+
 // Grabbing the unique journal entry id from the search URL
 const urlParams = new URLSearchParams(window.location.search);
 const entryId = urlParams.get('id'); // This is the unique ID for the journal entry
 
 // Get the list of entries from local storage
-const entryList = JSON.parse(localStorage.getItem("entry.list")) || [];
+let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
+// Save default entries to localStorage if entry.list doesn't already exist
+if (!localStorage.getItem("entry.list")) {
+    localStorage.setItem("entry.list", JSON.stringify(defaultEntries));
+}
 
 // Ensure that the url id matches an id in entry list
 const matchingEntry = entryList.find(entry => entry.id === Number(entryId));

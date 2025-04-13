@@ -19,7 +19,7 @@ const defaultEntries = [
       tags: "Played"
     },
     {
-        id: Date.now(),
+        id: Date.now() + 1,
       videoGameName: "Persona 3 Reload",
       entryTitle: "",
       date: "February 2nd, 2024",
@@ -38,7 +38,13 @@ const defaultEntries = [
       tags: "Played"
     }];
 
-
+// If localStorage has a 'entry.list' item, it uses that,
+// otherwise it uses defaultEntries.
+let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
+// Save default entries to localStorage if entry.list doesn't already exist
+if (!localStorage.getItem("entry.list")) {
+    localStorage.setItem("entry.list", JSON.stringify(defaultEntries));
+}
 // Add year to the footer
 document.querySelector("#year").innerHTML = new Date().getFullYear();
 
@@ -68,9 +74,6 @@ const formSubmitBtn = document.querySelector("#formSubmit")
 // Confirm Screen Area
 const confirmScreen = document.querySelector("#entryConfirmScreen")
 
-// If localStorage has a 'memory.list' item, it uses that,
-// otherwise it uses defaultEntries.
-let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
 
 // show the screen confirming entry has been saved
 const entryConfirmed = () => {
@@ -99,19 +102,18 @@ const entryConfirmed = () => {
     `
 }
 
-
+//From ChatGPT
 function checkImage(url) {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve(true);
-      img.onerror = () => resolve(false); // resolve false instead of reject to avoid try/catch
+      img.onerror = () => resolve(false);
       img.src = url;
     });
 };
 
 // Journal Entry Form 
 // Capture form data and save it as an object to local storage
-
 async function captureEntry() {
     console.log('Starting Journal Entry Capture')
 
