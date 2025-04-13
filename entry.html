@@ -15,7 +15,9 @@
     <header>
         <a href="#main" id="skip">Skip to main content</a>
         <!-- title of journal entry, UGC -->
-        <h1>Journal Entry</h1>
+        <div class="entryHeader">
+            <h1></h1>
+        </div>
         <!-- navigation -->
         <nav>
             <ul>
@@ -31,6 +33,7 @@
      Journal Entry Template/Layout -->
     <main id ="main"> 
         <div id="entryContainer">
+
                 <!-- Game Intro Section(could be fetched) -->
             <section tabindex="0">
                 <!-- Key Image -->
@@ -58,14 +61,11 @@
                     <!-- Conclusion Heading -->
                     <!-- Conclusion paragraph -->
             </section>
-
-            <!-- View other journal entries-->
-            <section tabindex="0">
-                <!-- Game Image -->
-                <!-- Game Title -->
-            </section>
-        </div>            
-        
+        </div>
+        <section id="otherEntries" tabindex="0">
+            <!-- Game Image -->
+            <!-- Entry Title -->
+        </section>
     </main>
 
     <!-- Footer -->
@@ -79,6 +79,5 @@
           </p>
     </footer>
 </body>
-<script src="js/home.js" defer></script>
 <script src="js/entry.js" defer></script>
 </html>

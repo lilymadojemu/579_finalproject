@@ -1,42 +1,68 @@
+// Grabbing the unique journal entry id from the search URL
+const urlParams = new URLSearchParams(window.location.search);
+const entryId = urlParams.get('id'); // This is the unique ID for the journal entry
+
+// Get the list of entries from local storage
+const entryList = JSON.parse(localStorage.getItem("entry.list")) || [];
+
+// Ensure that the url id matches an id in entry list
+const matchingEntry = entryList.find(entry => entry.id === Number(entryId));
+
 // DOM Elements from entry page
 const journalEntry = document.querySelector("#entryContainer")
+const moreEntries = document.querySelector("#otherEntries")
 
+// Displaying information from local storage onto page for specific entry
+const renderEntry = (matchingEntry) => {
+  if (!matchingEntry) {
+    // Handle case where ID doesn't match any entry (e.g., show error message)
+    console.error("No entry found with ID:", entryId);
+    journalEntry.innerHTML = "<p>Entry not found.</p>";
+    return;
+  }
+  document.querySelector(".entryHeader h1").innerHTML = matchingEntry.entryTitle;
+  const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
 
-// Displaying information from local storage onto page
-// Could use specific information selected on the overview page and use innerhtml to display on page instead of a template
-// Fetch information from local storage, would need to display on overviews page first
+  journalEntry.innerHTML += 
+  `      
+    <section tabindex="0" class="introduction">
+      <p>${matchingEntry.videoGameName}</p>
+      <p>${matchingEntry.date}</p>
+      <p>${matchingEntry.tags}</p>
+    </section>
 
-// MODIFY FOR PROJECT
-/**
- * Renders the memory list. Should be called on initial load
- * and anytime the memory list changes.
- */
-   
-const renderEntry = () => {
-    journalEntry.innerHTML="";
+    <section tabindex="0">
+      <figure>
+        <img src=${matchingEntry.overallImgAddress || defaultImg} alt="">
+        <figcaption>${matchingEntry.overallThoughtsImgCaption}</figcaption>
+      </figure>
+      <h2>Overall Thoughts</h2>
+      <p>${matchingEntry.overallThoughtsParagraph || "No Thoughts"}</p>
+    </section>
 
-    // HOW TO KNOW WHAT ENTRY TO SHOW
-    // By using a unique ID for each entry and linking it via the URL parameters, you’re setting up a solid, scalable way to pass and load the correct entry details.
-  // Here’s a quick recap of what you’ve figured out:
-  // •	Generate a unique ID when saving an entry to localStorage. This ID ensures that even if the game titles are the same, each entry can still be uniquely identified.
-  // •	Use URL parameters (like ?id=12345) to pass the unique entry ID to the detail page.
-  // •	Create a clickable button for each entry on the overview page, linking to entry.html?id=entryID.
-  // •	On the entry page, use the ID from the URL to fetch the correct entry data from localStorage and display it.
+    <section tabindex="0">
+      <figure>
+        <img src=${matchingEntry.keyImgAddress || defaultImg} alt="">
+        <figcaption>${matchingEntry.keyImgCaption}</figcaption>
+      </figure>
+      <h2>Key Moment(s)</h2>
+      <p>${matchingEntry.overallThoughtsParagraph || "No Thoughts"}</p>
+    </section>
 
-
-    // get item from local storage based on URL parameter ( this should be supplied to us already)
-    
-
-    // Update to reflect html structure of journal entry and insert where info for an individual entry would go in it
-    journalEntry.innerHTML += 
-    `<div class="position-relative col-12 border border-secondary rounded my-3 p-3 bg-white">
-      <div class="d-flex">
-        <h3>${memory.title}</h3>
-        <small class="px-1 text-muted align-self-center">${formatDateForMemory(memory.date)}</small>
-      </div>
-    <button data-date="${memory.date}" class="close-button">Ⓧ</button>
-    <p>${memory.description}</p>
-    </div>`;
-    ;
+    <section tabindex="0">
+      <figure>
+        <img src=${matchingEntry.conclusionImgAddress || defaultImg} alt="">
+        <figcaption>${matchingEntry.conclusionImgCaption}</figcaption>
+      </figure>
+      <h2>Conclusion</h2>
+      <p>${matchingEntry.conclusionThoughtsParagraph || "No Thoughts"}</p>
+    </section>
+    ` 
   };
 
+renderEntry(matchingEntry);
+
+// Populate the other entries page
+const viewMoreEntries = () => {
+  moreEntries.innerHTML="";
+};
