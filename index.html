@@ -177,25 +177,27 @@
         </article>
 
         <!-- Wishlist  -->
+         <!-- 
+           Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
+                -->
         <article id="contribute">
-            <div id="wishlistContainer" class="wishlist-container">
-                <section tabindex="0" class="container" >
-                    <!-- 
-                    Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
-                    -->
+            <section tabindex="0" class="container" >
+                <!-- Search Games Area -->
+                <form id="search">
+                    <label for="gameSearch">Search Games:</label>
+                    <input class="search-input" id="gameSearch" type="search" name="search" placeholder="Search for a game"/>
+                    <button id="search-btn">Search</button>
+                </form>
+                <section id="foundGames" class="hidden"></section>
 
-                    <!-- Search Games Area -->
-                    <form id="search">
-                        <input class="search-input" 
-                        type="search" name="search" placeholder="Search for games"/>
-                    </form>
-                    <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
-                    <!-- Wishlisted Games Area -->
-                    <h2>My Wishlist</h2>
+                <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
+                <!-- Wishlisted Games Area -->
+                <section id="wishlistGames">
+                  <h2>My Wishlist</h2>
                     <!-- Wishlist games container? -->
-
+                  <section class="wishlistContainer"></section>
                 </section>
-            </div>
+            </section>
         </article>
     </main>
 

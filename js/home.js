@@ -255,92 +255,55 @@ formSubmitBtn.addEventListener('click', function(e) {
 
 
 // Wishlist Enablement
+const searchForm = document.querySelector("#search");
+const searchInput = document.querySelector("#gameSearch");
+const foundGames = document.querySelector("#foundGames");
 
-// fetch https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad
-fetch('https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad')
-  .then(res => res.json())
-  .then((data) => {
-    // not good for like every game but it's a start
-    console.log(data.results)
-    const found = data.results.find(game => game.name === 'Limbo');
-    if (found) {
-      console.log('yes', found);
-    } else {
-      console.log('not found');
+let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
+
+searchForm.addEventListener("submit", e => {
+    e.preventDefault(); // Stops the form from refreshing the page
+    const searchQuery = searchInput.value.trim(); // Get user input
+    if (searchQuery) {
+      fetchGames(searchQuery); // Pass the search term to the fetch function
     }
+  });
+
+const fetchGames = (query) => {
+    fetch(`https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad&search=${query}&page_size=10`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.results); // Just for debugging
+      renderSearchResults(data.results); // Show the games on the page
+    })
+    .catch(err => {
+      console.error('Error fetching games:', err);
     });
+};
 
-// Search Code // <-- Around what I want UPDATE FOR VIDEO GAME JOURNAl:
-function searchGames(id) {
-    // It's working! Now, need to figure out how it will grad search input and identify names...
-    fetch('https://rawg.io/api/games/' + id + '?key=6b0a81daa54e4f359c511cc27e0d57ad')
-    .then(response => response.json())
-    .then((data) => {console.log(data.description)})
-    .catch(error => console.error('Error:', error));
-
-    // want to see if data.gamename (or something like that) == user input
-        // refer to the github regarding how searching a game up works
-        // if the game name does match, 
-}
+const renderSearchResults = (results) => {
+    foundGames.innerHTML = ""; // Clear any previous results
+    foundGames.classList.remove("hidden"); // Make sure the results section is visible
   
-// function searchGames(id) {
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET', 'https://rawg.io/api/games/' + id + '?key=6b0a81daa54e4f359c511cc27e0d57ad');
-//     xhr.responseType = 'json';
-//     xhr.addEventListener('load', () => {
-//       currentGame = xhr.response;
-//     //   updateGameInfo(currentGame);
-//     //   $loadingView.classList.add('hidden');
-//     //   $gameInfoView.classList.remove('hidden');
-//     });
-//     xhr.send();
-//   }
+    results.forEach(game => {
+      const gameDiv = document.createElement("div");
+      gameDiv.classList.add("search-result");
+  
+      gameDiv.innerHTML = `
+        <img src="${game.background_image}" alt="${game.name}" class="game-img"/>
+        <p>${game.name}</p>
+        <button class="add-to-wishlist" 
+          data-id="${game.id}" 
+          data-name="${game.name}" 
+          data-img="${game.background_image}">
+          Add to Wishlist
+        </button>
+      `;
+  
+      foundGames.appendChild(gameDiv);
+    });
+  };
 
-// Create a container under already wishlisted games to house games appearing from search, a type of what I am doing for overviews page
-function buildSearchResults(results) {
-const $searchResults = document.querySelector('#search-results');
-if ($searchResults) {
-    $searchResults.remove();
-}
-
-const $resultRow = document.createElement('div');
-$resultRow.setAttribute('class', 'row search');
-$resultRow.setAttribute('id', 'search-results');
-
-for (let i = 0; i < results.length; i++) {
-    const $game = document.createElement('div');
-    $game.setAttribute('class', 'col-1-3 flex-group-vert');
-    $game.setAttribute('data-item', 'game');
-    $game.setAttribute('data-id', results[i].id);
-
-    const $gameLink = document.createElement('a');
-
-    const $imgWrap = document.createElement('div');
-    $imgWrap.setAttribute('class', 'cover-img-wrap search');
-
-    const $coverImg = document.createElement('img');
-    $coverImg.setAttribute('class', 'cover-img');
-    $coverImg.setAttribute('src', results[i].background_image);
-    $coverImg.setAttribute('alt', results[i].name);
-
-    const $title = document.createElement('h2');
-    $title.textContent = results[i].name;
-
-    $game.appendChild($gameLink);
-    $gameLink.appendChild($imgWrap);
-    $gameLink.appendChild($title);
-    $imgWrap.appendChild($coverImg);
-    $resultRow.appendChild($game);
-}
-
-return $resultRow;
-}
-
-// From github,  would be creating how the game looks on the wishlist
-function createGameData() {
-    const game = {};
-    game.id = currentGame.id;
-    game.name = currentGame.name;
-    game.background_image = currentGame.background_image;
-    // tags
+const renderWishlist = () => {
+    
 }
