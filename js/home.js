@@ -2,9 +2,9 @@
 const defaultEntries = [
     {
         id: Date.now(),
-      videoGameName: "Celeste",
-      entryTitle: "",
-      date: "April 19th, 2025",
+      videoGameName:"Celeste",
+      entryTitle:"",
+      date:"April 19th, 2025",
       overallThoughtsImg:"",
       overallThoughtsImgCaption:"",
       overallThoughtsParagraph:"",
@@ -16,7 +16,7 @@ const defaultEntries = [
       conclusionImgCaption:"",
       conclusionHeading:"",
       conclusionParagraph:"",
-      tags: "Played"
+      tags:"Played"
     },
     {
         id: Date.now() + 1,
@@ -35,7 +35,7 @@ const defaultEntries = [
       conclusionImgCaption:"",
       conclusionHeading:"",
       conclusionParagraph:"",
-      tags: "Played"
+      tags:"Played"
     }];
 
 // If localStorage has a 'entry.list' item, it uses that,

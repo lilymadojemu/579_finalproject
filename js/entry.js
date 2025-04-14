@@ -40,15 +40,14 @@ const defaultEntries = [
 
 // Grabbing the unique journal entry id from the search URL
 const urlParams = new URLSearchParams(window.location.search);
-const entryId = urlParams.get('id'); // This is the unique ID for the journal entry
-
+// This is the unique ID for the journal entry
+const entryId = urlParams.get("id");
 // Get the list of entries from local storage
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
 // Save default entries to localStorage if entry.list doesn't already exist
 if (!localStorage.getItem("entry.list")) {
     localStorage.setItem("entry.list", JSON.stringify(defaultEntries));
 }
-
 // Ensure that the url id matches an id in entry list
 const matchingEntry = entryList.find(entry => entry.id === Number(entryId));
 
@@ -59,7 +58,7 @@ const moreEntries = document.querySelector("#otherEntries")
 // Displaying information from local storage onto page for specific entry
 const renderEntry = (matchingEntry) => {
   if (!matchingEntry) {
-    // Handle case where ID doesn't match any entry (e.g., show error message)
+    // Handle case where ID doesn't match any entry 
     console.error("No entry found with ID:", entryId);
     journalEntry.innerHTML = "<p>Entry not found.</p>";
     return;
@@ -106,7 +105,7 @@ const renderEntry = (matchingEntry) => {
 
 renderEntry(matchingEntry);
 
-// Populate the other entries page
-const viewMoreEntries = () => {
+// Show a preview of the entries that the user has recently made
+const viewRecentEntries = () => {
   moreEntries.innerHTML="";
 };
