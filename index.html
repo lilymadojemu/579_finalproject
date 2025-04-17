@@ -21,13 +21,17 @@
         <nav>
             <ul>
                 <li><a href = "index.html">Home</a></li>
-                <li><a href = "entriesOverview.html"> Journal Entries</a></li>
+                <li><a href = "wishlist.html"> Wishlist</a></li>
                 <li><a href = "about.html">About Me</a></li>
             </ul>
         </nav>
     </header>
     
     <main id="main">
+        <section id="journalFilter">
+        </section>
+        <section id="allEntries">
+        </section>
         <!-- Journal Entry Form -->
         <!-- WAVE Errors -->
         <article id="guidelines">
@@ -176,29 +180,6 @@
             </section>
         </article>
 
-        <!-- Wishlist  -->
-         <!-- 
-           Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
-                -->
-        <article id="contribute">
-            <section tabindex="0" class="container" >
-                <!-- Search Games Area -->
-                <form id="search">
-                    <label for="gameSearch">Search Games:</label>
-                    <input class="search-input" id="gameSearch" type="search" name="search" placeholder="Search for a game"/>
-                    <button id="search-btn">Search</button>
-                </form>
-                <section id="foundGames" class="hidden"></section>
-
-                <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
-                <!-- Wishlisted Games Area -->
-                <section id="wishlistGames">
-                  <h2>My Wishlist</h2>
-                    <!-- Wishlist games container? -->
-                  <section class="wishlistContainer"></section>
-                </section>
-            </section>
-        </article>
     </main>
 
     <!-- Footer -->

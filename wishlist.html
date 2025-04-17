@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Css links -->
+    <link rel="stylesheet" href="css/html5reset.css">
+    <!-- TBD if removed -->
+    <link rel="stylesheet" href="css/styleTest.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>About Me</title>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#main" id="skip">Skip to main content</a>
+        <h1>About Me</h1>
+        <!-- navigation -->
+        <nav>
+            <ul>
+              <li><a href = "index.html">Home</a></li>
+              <li><a href = "wishlist.html"> Wishlist</a></li>
+              <li><a href = "about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Wishlist  -->
+         <!-- Explanation: Type in game you would like to add to wishlist, press enter that game is added and that information is fetched and game is added 
+                -->
+                <article id="contribute">
+                  <section tabindex="0" class="container" >
+                      <!-- Search Games Area -->
+                      <form id="search">
+                          <label for="gameSearch">Search Games:</label>
+                          <input class="search-input" id="gameSearch" type="search" name="search" placeholder="Search for a game"/>
+                          <button id="search-btn">Search</button>
+                      </form>
+                      <section id="foundGames" class="hidden"></section>
+                      <!-- Where search results will appear, the user will then click on a game and it will become part of the official wishlist -->
+                      <!-- Wishlisted Games Area -->
+                      <section id="wishlistGames">
+                        <h2>My Wishlist</h2>
+                          <!-- Wishlist games container? -->
+                        <section class="wishlistContainer"></section>
+                      </section>
+                  </section>
+            </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <div class="container">
+        <p>
+          ૮꒰ ˶• ༝ •˶꒱ა 
+          <br>
+          Created by <a href="https://www.linkedin.com/in/lilymadojemu/">Lily Madojemu</a> 
+          <br>
+          ♡ <span id="year"></span> ♡
+        </p>
+  </footer>
+</body>
+<script src="js/wishlist.js" defer></script>
+</html>

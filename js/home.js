@@ -253,57 +253,71 @@ formSubmitBtn.addEventListener('click', function(e) {
     captureEntry(e);
   });
 
+// Render and Filter ALl Journal Entires
+// Grabbing DOM elements 
+const entriesContainer = document.querySelector('#allEntries');
+const entryFilter = document.querySelector("#journalFilter")
 
-// Wishlist Enablement
-const searchForm = document.querySelector("#search");
-const searchInput = document.querySelector("#gameSearch");
-const foundGames = document.querySelector("#foundGames");
+// Preparing for filtering entries based on tag(s)
+let filterStatus = false;
+let filteredEntries = [];
 
-let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
+// Render preview of journal entries based on information from entryList
+const renderEntries = (entries) => {
+  if (!filterStatus) {
+    entries = entryList
+  } else {
+    entries = filteredEntries
+  }
+    entriesContainer.innerHTML="";
+    // Create all entry previews from entryList
+    entries.forEach((entry) => {
+      entriesContainer.innerHTML += 
+        `<div class="position-relative col-12 border border-secondary rounded my-3 p-3 bg-white">
+         <div class="d-flex">
+          <h3>${entry.videoGameName}</h3>
+          <h4>${entry.entryTitle}</h4>
+          <small class="px-1 text-muted align-self-center">${entry.date}</small>
+         </div>
+       <p>${entry.entryTitle}</p>
+       <p> ${entry.tags} </p>
+      <a href='entry.html?id=${entry.id}'><button>View Journal Entry</button></a> 
+       </div>`;
+      });
+}
 
-searchForm.addEventListener("submit", e => {
-    e.preventDefault(); // Stops the form from refreshing the page
-    const searchQuery = searchInput.value.trim(); // Get user input
-    if (searchQuery) {
-      fetchGames(searchQuery); // Pass the search term to the fetch function
-    }
+renderEntries();
+
+
+// Filtering based on tags
+const tagList = ["Played", "Did Not Finish", "Playing", "Watched", "Not Played"]
+
+const renderTagFilters = () => {
+  entryFilter.innerHTML = "";
+  tagList.forEach(tag => {
+    entryFilter.innerHTML += 
+    `<button class="tag-btn" value="${tag}">${tag}</button>`;
+  });
+  entryFilter.innerHTML += `<button class="showAll">Show All Entries</button>`;
+
+  // Add event listeners after buttons are added to the DOM
+  document.querySelectorAll(".tag-btn").forEach(button => {
+    button.addEventListener("click", e => {
+      filterStatus = true;
+      const selectedTags = e.target.value;
+      filteredEntries = entryList.filter(
+        (entry) => entry.tags && entry.tags === selectedTags
+      );
+      console.log("Checking entry:", filteredEntries);
+      renderEntries(filteredEntries);
+    });
+  document.querySelector(".showAll").addEventListener("click", e => {
+    filterStatus = false;
+    filteredEntries = [];
+    renderEntries();
   });
 
-const fetchGames = (query) => {
-    fetch(`https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad&search=${query}&page_size=10`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.results); // Just for debugging
-      renderSearchResults(data.results); // Show the games on the page
-    })
-    .catch(err => {
-      console.error('Error fetching games:', err);
-    });
-};
-
-const renderSearchResults = (results) => {
-    foundGames.innerHTML = ""; // Clear any previous results
-    foundGames.classList.remove("hidden"); // Make sure the results section is visible
-  
-    results.forEach(game => {
-      const gameDiv = document.createElement("div");
-      gameDiv.classList.add("search-result");
-  
-      gameDiv.innerHTML = `
-        <img src="${game.background_image}" alt="${game.name}" class="game-img"/>
-        <p>${game.name}</p>
-        <button class="add-to-wishlist" 
-          data-id="${game.id}" 
-          data-name="${game.name}" 
-          data-img="${game.background_image}">
-          Add to Wishlist
-        </button>
-      `;
-  
-      foundGames.appendChild(gameDiv);
-    });
-  };
-
-const renderWishlist = () => {
-    
+  });
 }
+
+renderTagFilters();
