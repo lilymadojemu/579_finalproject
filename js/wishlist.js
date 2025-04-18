@@ -5,6 +5,7 @@ document.querySelector("#year").innerHTML = new Date().getFullYear();
 const searchForm = document.querySelector("#search");
 const searchInput = document.querySelector("#gameSearch");
 const foundGames = document.querySelector("#foundGames");
+const wishlistContainer = document.querySelector(".wishlistContainer")
 
 let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
 
@@ -20,7 +21,6 @@ const fetchGames = (query) => {
     fetch(`https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad&search=${query}&page_size=10`)
     .then(res => res.json())
     .then(data => {
-      console.log(data.results); // Just for debugging
       renderSearchResults(data.results); // Show the games on the page
     })
     .catch(err => {
@@ -31,26 +31,42 @@ const fetchGames = (query) => {
 const renderSearchResults = (results) => {
     foundGames.innerHTML = ""; // Clear any previous results
     foundGames.classList.remove("hidden"); // Make sure the results section is visible
-  
-    results.forEach(game => {
-      const gameDiv = document.createElement("div");
-      gameDiv.classList.add("search-result");
-  
-      gameDiv.innerHTML = `
-        <img src="${game.background_image}" alt="${game.name}" class="game-img"/>
+    results.forEach((game) => {
+      foundGames.innerHTML += `
+        <img class="gameImg" src="${game.background_image}" alt="${game.name}"/>
+
         <p>${game.name}</p>
-        <button class="add-to-wishlist" 
-          data-id="${game.id}" 
-          data-name="${game.name}" 
-          data-img="${game.background_image}">
-          Add to Wishlist
+
+        <button class="wishlistBtn" data-id="${game.id}" data-name="${game.name}" data-release="${game.release}" data-rating="${game.rating}"data-img="${game.background_image}"> 
+        Add to Wishlist 
         </button>
-      `;
-  
-      foundGames.appendChild(gameDiv);
+      `
+      document.querySelectorAll(".wishlistBtn").forEach(button =>{
+        button.addEventListener("click", e => {
+            // Add game to wishList in local storage
+            wishList.push(e.target.dataset)
+            // Save the updated entryList to localStorage
+            localStorage.setItem("wish.list", JSON.stringify(wishList));
+            // Hide view of the search results area
+            foundGames.classList.add("hidden"); 
+            // Render Wishlist area
+            renderWishlist(wishList);
+        })
+      })
     });
   };
 
-const renderWishlist = () => {
-    
-}
+
+const renderWishlist = (wishList) => {
+      // Display the chosen game in the wishlist area
+      wishList.forEach((game) => {
+        wishlistContainer.innerHTML += `
+        <img class="gameImg" src="${game.img}" alt="${game.name}"/>
+        <p>${game.name}<p>
+        <button class="deleteBtn">Delete</button>
+        `
+      })
+
+};
+
+renderWishlist(wishList);

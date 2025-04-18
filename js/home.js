@@ -220,7 +220,6 @@ async function captureEntry() {
           conclusionParagraph: conclusionParagraphInput.value,
           tags: selectedTags.value
         };
-        console.log(newEntry)
         // Add the new entry to the entryList
         entryList.push(newEntry);
         console.log(entryList)
