@@ -270,19 +270,24 @@ const renderEntries = (entries) => {
   }
     entriesContainer.innerHTML="";
     // Create all entry previews from entryList
+    const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
+
     entries.forEach((entry) => {
       entriesContainer.innerHTML += 
-        `<div class="position-relative col-12 border border-secondary rounded my-3 p-3 bg-white">
+        `
+        <div class="position-relative col-12 border border-secondary rounded my-3 p-3 ">
+          <img src=${entry.overallThoughtsImg || defaultImg} alt="">
          <div class="d-flex">
           <h3>${entry.videoGameName}</h3>
           <h4>${entry.entryTitle}</h4>
           <small class="px-1 text-muted align-self-center">${entry.date}</small>
          </div>
        <p>${entry.entryTitle}</p>
-       <p> ${entry.tags} </p>
+       <p class="taggedEntry"> ${entry.tags} </p>
       <a href='entry.html?id=${entry.id}'><button>View Journal Entry</button></a> 
        </div>`;
       });
+
 }
 
 renderEntries();

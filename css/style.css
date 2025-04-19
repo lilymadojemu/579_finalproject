@@ -41,4 +41,13 @@
 footer {
     text-align: center;
 }
+.createEntryBtn {
+    text-align: center;
+}
 
+#journalFilter {
+    text-align: center;
+}
+#allEntries {
+    display: grid;
+}

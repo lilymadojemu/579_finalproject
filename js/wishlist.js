@@ -8,7 +8,10 @@ const foundGames = document.querySelector("#foundGames");
 const wishlistContainer = document.querySelector(".wishlistContainer")
 
 let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
-
+// Have a state for when there are no games in the wishlist
+if (!wishList) {
+  console.log("not wishes")
+}
 searchForm.addEventListener("submit", e => {
     e.preventDefault(); // Stops the form from refreshing the page
     const searchQuery = searchInput.value.trim(); // Get user input
@@ -62,11 +65,12 @@ const renderWishlist = (wishList) => {
       wishList.forEach((game) => {
         wishlistContainer.innerHTML += `
         <img class="gameImg" src="${game.img}" alt="${game.name}"/>
-        <p>${game.name}<p>
-        <button class="deleteBtn">Delete</button>
-        `
-      })
+        <p>${game.name}<p>`
+      });
 
+      document.querySelectorAll(".gameImg").forEach((img) => {
+        img.style.width = "500px"
+      });
 };
 
 renderWishlist(wishList);
