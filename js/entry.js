@@ -69,15 +69,16 @@ const renderEntry = (matchingEntry) => {
 
   journalEntry.innerHTML += 
   `      
+
     <section tabindex="0" class="introduction">
-      <p>${matchingEntry.videoGameName}</p>
+      <h2>${matchingEntry.videoGameName}</h2>
       <p>${matchingEntry.date}</p>
       <p>${matchingEntry.tags}</p>
     </section>
 
     <section tabindex="0">
       <figure>
-        <img src=${matchingEntry.overallImgAddress || defaultImg} alt="">
+        <img src=${matchingEntry.overallThoughtsImg|| defaultImg} alt="">
         <figcaption>${matchingEntry.overallThoughtsImgCaption}</figcaption>
       </figure>
       <h2>Overall Thoughts</h2>
@@ -85,23 +86,25 @@ const renderEntry = (matchingEntry) => {
     </section>
 
     <section tabindex="0">
+      <h2>Key Moments </h2>
       <figure>
-        <img src=${matchingEntry.keyImgAddress || defaultImg} alt="">
+        <img src=${matchingEntry.keyMomentImg|| defaultImg} alt="">
         <figcaption>${matchingEntry.keyMomentImgCaption}</figcaption>
       </figure>
-      <h2>Key Moment(s)</h2>
       <p>${matchingEntry.keyMomentParagraph|| "No Thoughts"}</p>
     </section>
 
     <section tabindex="0">
+      <h2>Conclusion</h2>
+
       <figure>
-        <img src=${matchingEntry.conclusionImgAddress || defaultImg} alt="">
+        <img src=${matchingEntry.conclusionImg|| defaultImg} alt="">
         <figcaption>${matchingEntry.conclusionImgCaption}</figcaption>
       </figure>
-      <h2>Conclusion</h2>
-      <p>${matchingEntry.conclusionThoughtsParagraph || "No Thoughts"}</p>
+      <p>${matchingEntry.conclusionParagraph || "No Thoughts"}</p>
     </section>
     ` 
+    document.querySelectorAll("img").style.margin = "0 auto"
   };
 
 renderEntry(matchingEntry);

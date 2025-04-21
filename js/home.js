@@ -226,13 +226,13 @@ async function captureEntry() {
           entryTitle: entryNameInput.value,
           videoGameName: videoGameTitleInput.value,
           date: dateEntryInput.value,
-          overallImgAddress: overallImgInput.value,
-          overallImgCaptionInput: overallImgCaptionInput.value,
-          overallParagraph: overallParagraphInput.value,
-          keyImgAddress: keyImgInput.value,
-          keyImgCaption: keyImgCaptionInput.value,
-          keyParagraph: keyParagraphInput.value,
-          conclusionImgAddress: conclusionImgInput.value,
+          overallThoughtsImg: overallImgInput.value,
+          overallThoughtsImgCaption: overallImgCaptionInput.value,
+          overallThoughtsParagraph: overallParagraphInput.value,
+          keyMomentImg: keyImgInput.value,
+          keyMomentImgCaption: keyImgCaptionInput.value,
+          keyMomentParagraph: keyParagraphInput.value,
+          conclusionImg: conclusionImgInput.value,
           conclusionImgCaption: conclusionImgCaptionInput.value,
           conclusionParagraph: conclusionParagraphInput.value,
           tags: selectedTags.value
@@ -293,13 +293,12 @@ const renderEntries = (entries) => {
       entriesContainer.innerHTML += 
         `
         <div class="position-relative col-12 border border-secondary rounded my-3 p-3 ">
+          <h2>${entry.entryTitle}</h2>
           <img src=${entry.overallThoughtsImg || defaultImg} alt="">
          <div class="d-flex">
           <h3>${entry.videoGameName}</h3>
-          <h4>${entry.entryTitle}</h4>
           <small class="px-1 text-muted align-self-center">${entry.date}</small>
          </div>
-       <p>${entry.entryTitle}</p>
        <p class="taggedEntry"> ${entry.tags} </p>
       <a href='entry.html?id=${entry.id}'><button>View Journal Entry</button></a> 
        </div>`;

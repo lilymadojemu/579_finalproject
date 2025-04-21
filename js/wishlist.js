@@ -59,6 +59,7 @@ const renderSearchResults = (results) => {
 
 const renderWishlist = (wishList) => {
       // Display the chosen game in the wishlist area
+      wishlistContainer.innerHTML = ""
       wishList.forEach((game) => {
         wishlistContainer.innerHTML += `
         <img class="gameImg" src="${game.img}" alt="${game.name}"/>
