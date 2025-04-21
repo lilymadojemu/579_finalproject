@@ -7,7 +7,6 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/html5reset.css">
-    <!-- TBD if removed -->
     <link rel="stylesheet" href="css/styleTest.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Home Page</title>
@@ -16,7 +15,7 @@
     <!-- Header -->
     <header>
         <a href="#main" id="skip">Skip to main content</a>
-        <h1>579 Video Game Journal</h1>
+        <h1>Video Game Journal</h1>
         <!-- navigation -->
         <nav>
             <ul>
@@ -28,13 +27,14 @@
     
     <main id="main">
       <div class="createEntryBtn">
-        <button > Create a Journal Entry</button>
+        <button> Create a Journal Entry</button>
       </div>
-
-        <section  id="journalFilter">
-        </section>
-        <section id="allEntries">
-        </section>
+        <div class="journalPreviews">
+          <section id="journalFilter">
+          </section>
+          <section id="allEntries">
+          </section>
+        </div>
 
         <!-- Journal Entry Form -->
         <article id="guidelines">
@@ -45,7 +45,7 @@
                 Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
                 https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->    
 
-                <form id="journalEntryForm" style="display:none" class="hidden">
+                <form id="journalEntryForm">
                     <fieldset class="form-group">
                       <h2><legend>Create Your Journal Entry</legend></h2>
                       <!-- User Names their journal entry -->
@@ -177,7 +177,7 @@
             </section>
         </article>
         <article id="guidelines">
-            <section id="entryConfirmScreen" class="hidden">
+            <section id="entryConfirmScreen">
             </section>
         </article>
 

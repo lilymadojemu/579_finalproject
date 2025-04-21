@@ -49,6 +49,7 @@ if (!localStorage.getItem("entry.list")) {
 document.querySelector("#year").innerHTML = new Date().getFullYear();
 
 // DOM Element Selectors
+const journalEntryBtn = document.querySelector(".createEntryBtn")
 // The Entire Journal Entry Form 
 const journalEntryForm = document.querySelector("#journalEntryForm")
 // Introduction
@@ -74,6 +75,17 @@ const formSubmitBtn = document.querySelector("#formSubmit")
 // Confirm Screen Area
 const confirmScreen = document.querySelector("#entryConfirmScreen")
 
+// By default the jounrla entry form is hidden 
+journalEntryForm.classList.add("hidden");
+confirmScreen.classList.add("hidden");
+
+
+// When you click, create Entry btn, I want the overview previews & filters to disappear and the form to come in its palce
+journalEntryBtn.addEventListener("click", e => {
+  document.querySelector(".journalPreviews").classList.add("hidden");
+  journalEntryBtn.classList.add("hidden");
+  journalEntryForm.classList.remove("hidden");
+})
 
 // show the screen confirming entry has been saved
 const entryConfirmed = () => {
@@ -96,10 +108,14 @@ const entryConfirmed = () => {
 
         <a href='entry.html?id=${lastEntry.id}'><button>View Your Current Journal Entry</button></a> 
 
-        <a href='entriesOverview.html'><button>View All Journal Entries</button></a> 
+        <button onClick=location.reload()>View All Journal Entries</button>
 
-        <a onClick=location.reload()><button>Create another journal entry</button></a>
+        <button class="anotherEntryBtn">Create another journal entry</button>
     `
+    document.querySelector(".anotherEntryBtn").addEventListener("click", e => {
+      confirmScreen.innerHTML=""
+      journalEntryForm.classList.remove("hidden");
+    })
 }
 
 //From ChatGPT
@@ -295,9 +311,9 @@ renderEntries();
 
 // Filtering based on tags
 const tagList = ["Played", "Did Not Finish", "Playing", "Watched", "Not Played"]
-
 const renderTagFilters = () => {
   entryFilter.innerHTML = "";
+  entryFilter.innerHTML += `<p> Filters </p>`;
   tagList.forEach(tag => {
     entryFilter.innerHTML += 
     `<button class="tag-btn" value="${tag}">${tag}</button>`;
