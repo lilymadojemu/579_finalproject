@@ -71,3 +71,8 @@ figure > img, figcaption {
 .gameImg {
     display: block;
 }
+
+.entryImg {
+    height: 60%;
+    width: 30%;
+}

@@ -294,7 +294,7 @@ const renderEntries = (entries) => {
         `
         <div class="position-relative col-12 border border-secondary rounded my-3 p-3 ">
           <h2>${entry.entryTitle}</h2>
-          <img src=${entry.overallThoughtsImg || defaultImg} alt="">
+          <img class="entryImg" src=${entry.overallThoughtsImg || defaultImg} alt="">
          <div class="d-flex">
           <h3>${entry.videoGameName}</h3>
           <small class="px-1 text-muted align-self-center">${entry.date}</small>
