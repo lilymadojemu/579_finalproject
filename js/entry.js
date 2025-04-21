@@ -17,7 +17,7 @@ const defaultEntries = [
     conclusionImgCaption:"There's still more?",
     // Written by ChatGPT: https://chatgpt.com/share/68059580-f2a4-8009-b99e-80a6c641d11e
     conclusionParagraph:"Climbing that mountain wasn’t just a test of skill—it was a reflection of something deeper. Celeste reminded me that the journey through doubt, fear, and struggle is just as important as reaching the summit. It’s not about perfection; it’s about persistence, and learning to embrace every part of yourself, even the ones you wish you could push away. It left me feeling seen, challenged, and ultimately uplifted.",
-    tags: "Played"
+    tags: "Playing"
   },
   {
     id: Date.now() + 1,
@@ -64,12 +64,12 @@ const renderEntry = (matchingEntry) => {
     journalEntry.innerHTML = "<p>Entry not found.</p>";
     return;
   }
+
   document.querySelector(".entryHeader h1").innerHTML = matchingEntry.entryTitle;
   const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
 
   journalEntry.innerHTML += 
   `      
-
     <section tabindex="0" class="introduction">
       <h2>${matchingEntry.videoGameName}</h2>
       <p>${matchingEntry.date}</p>

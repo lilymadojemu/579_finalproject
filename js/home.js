@@ -17,7 +17,7 @@ const defaultEntries = [
     conclusionImgCaption:"There's still more?",
     // Written by ChatGPT: https://chatgpt.com/share/68059580-f2a4-8009-b99e-80a6c641d11e
     conclusionParagraph:"Climbing that mountain wasn’t just a test of skill—it was a reflection of something deeper. Celeste reminded me that the journey through doubt, fear, and struggle is just as important as reaching the summit. It’s not about perfection; it’s about persistence, and learning to embrace every part of yourself, even the ones you wish you could push away. It left me feeling seen, challenged, and ultimately uplifted.",
-    tags: "Played"
+    tags: "Playing"
   },
   {
     id: Date.now() + 1,
@@ -42,6 +42,7 @@ const defaultEntries = [
 // If localStorage has a 'entry.list' item, it uses that,
 // otherwise it uses defaultEntries.
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
+
 // Save default entries to localStorage if entry.list doesn't already exist
 if (!localStorage.getItem("entry.list")) {
     localStorage.setItem("entry.list", JSON.stringify(defaultEntries));
@@ -49,11 +50,11 @@ if (!localStorage.getItem("entry.list")) {
 // Add year to the footer
 document.querySelector("#year").innerHTML = new Date().getFullYear();
 
-// DOM Element Selectors
+// DOM Element Selectors for Journal Entries
 const journalEntryBtn = document.querySelector(".createEntryBtn")
 // The Entire Journal Entry Form 
 const journalEntryForm = document.querySelector("#journalEntryForm")
-// Introduction
+// Initial Journal entry Inputs
 const entryNameInput = document.querySelector("#journalEntryName");
 const videoGameTitleInput = document.querySelector("#videoGameTitleForm");
 const dateEntryInput = document.querySelector("#dateEntryId")
@@ -76,33 +77,45 @@ const formSubmitBtn = document.querySelector("#formSubmit")
 // Confirm Screen Area
 const confirmScreen = document.querySelector("#entryConfirmScreen")
 
-// By default the jounrla entry form is hidden 
+// DOM Element for Rendering journal entries overview
+const entriesContainer = document.querySelector('#allEntries');
+
+// DOM Element for Filtering Journal Entries
+const entryFilter = document.querySelector("#journalFilter");
+
+// Preparing for filtering entries
+let filterStatus = false;
+let filteredEntries = [];
+
+// By default the journal entry form and journal entry confirm screen are hidden 
 journalEntryForm.classList.add("hidden");
 confirmScreen.classList.add("hidden");
 
 
-// When you click, create Entry btn, I want the overview previews & filters to disappear and the form to come in its palce
+// When you click "Create a Journal Entry", hide journal entry overview & filter area then have the journal entry form appear 
 journalEntryBtn.addEventListener("click", e => {
   document.querySelector(".journalPreviews").classList.add("hidden");
   journalEntryBtn.classList.add("hidden");
   journalEntryForm.classList.remove("hidden");
 })
 
-// show the screen confirming entry has been saved
+/**
+ * show the screen confirming that a journal entry has been saved
+ */
 const entryConfirmed = () => {
-    console.log('confirmed!');
-    // show the screen confirming entry has been saved
-
-    // Hide form area
+    // Hides journal entry form area
     journalEntryForm.classList.add("hidden");
-
-    // Reveal confirm screen
+    // Reveals confirm screen
     confirmScreen.classList.remove("hidden");
-    // Getting the information of the entry the user just submitted
+
+    // Gets the information of the entry the user just submitted
     const entryList = JSON.parse(localStorage.getItem('entry.list'));
     const lastEntry = entryList[entryList.length - 1];
 
-    // have 3 buttons: go to entry page of the entry just created, go to the journal overview page, or go back to the form and create a new entry
+    // have 3 buttons: 
+    // 1. Go to entry page of the entry just created, 
+    // 2. go back to the journal overview page (the original home page), 
+    // 3. Go back to the form and create a new entry
     confirmScreen.innerHTML = 
     ` 
         <h2>Journal Entry Complete!</h2> 
@@ -113,13 +126,18 @@ const entryConfirmed = () => {
 
         <button class="anotherEntryBtn">Create another journal entry</button>
     `
+    // Hiding confirm screen from view then showing the journal entry form 
     document.querySelector(".anotherEntryBtn").addEventListener("click", e => {
       confirmScreen.innerHTML=""
       journalEntryForm.classList.remove("hidden");
     })
 }
 
-//From ChatGPT
+
+/**
+ * Checks url for Image address to ensure image url's are valid
+ * From ChatGPT
+ */
 function checkImage(url) {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -129,13 +147,13 @@ function checkImage(url) {
     });
 };
 
-// Journal Entry Form 
-// Capture form data and save it as an object to local storage
+/**
+ * Captures journal entry form data then saves it as an object to local storage
+ */
 async function captureEntry() {
-    console.log('Starting Journal Entry Capture')
 
-    // determine if journal entry is valid or not, img stuff not required, everything else is
-    // Validation CSS Bootstrap: https://getbootstrap.com/docs/5.0/forms/validation/
+    // determine if journal entry is valid or not, 
+    // img & tag area not required, everything else is
 
     // Intro Validation
     if (!entryNameInput.value) {
@@ -144,7 +162,6 @@ async function captureEntry() {
     } else {
         entryNameInput.classList.remove("is-invalid");
     };
-    // See if localized value is needed
     if (!dateEntryInput.value){
         dateEntryInput.classList.add('is-invalid');
       } else{ 
@@ -160,7 +177,6 @@ async function captureEntry() {
 
     };
     // Overall Thoughts Validation
-    // If image address is valid or not....might be a better way to determine
     const overallImgIsValid = await checkImage(overallImgInput.value);
     if (!overallImgIsValid && overallImgInput.value) {
       overallImgInput.classList.add("is-invalid");
@@ -206,7 +222,10 @@ async function captureEntry() {
         conclusionParagraphInput.classList.remove("is-invalid");
     };
 
-    // If entry information is valid, create a new entry object, push it to entryList, and save it to localstorage
+    // If entry information is valid, 
+    // create a new entry object, push it to entryList,
+    // and save it to localstorage
+
     const isValid =
     entryNameInput.value &&
     videoGameTitleInput.value &&
@@ -220,7 +239,6 @@ async function captureEntry() {
     selectedTags.value;
 
     if (isValid) {
-        // Create a new entry if validation passes, this is what will be saved to localstorage
         const newEntry = {
           id: Date.now(),
           entryTitle: entryNameInput.value,
@@ -239,11 +257,11 @@ async function captureEntry() {
         };
         // Add the new entry to the entryList
         entryList.push(newEntry);
-        console.log(entryList)
         
         // Save the updated entryList to localStorage
         localStorage.setItem("entry.list", JSON.stringify(entryList));
-        // Clear all inputs (only after everything is valid)
+
+        // Clear all inputs after everything is validated
         entryNameInput.value = "";
         videoGameTitleInput.value = "";
         dateEntryInput.value = "";
@@ -257,39 +275,35 @@ async function captureEntry() {
         conclusionImgCaptionInput.value = "";
         conclusionParagraphInput.value = "";
         selectedTags.value = "";
+
         // Move on to the entry confirmation screen
-        console.log("Entry saved to localStorage!");
         entryConfirmed();
         }
     };
 
-// In order for captureEntry to happen, add event listener to submit button to capture the appropriate data
+//Enable captureEntry() after journal entry form has been submitted
 formSubmitBtn.addEventListener('click', function(e) {
     e.preventDefault();
     captureEntry(e);
   });
 
-// Render and Filter ALl Journal Entires
-// Grabbing DOM elements 
-const entriesContainer = document.querySelector('#allEntries');
-const entryFilter = document.querySelector("#journalFilter")
-
-// Preparing for filtering entries based on tag(s)
-let filterStatus = false;
-let filteredEntries = [];
-
-// Render preview of journal entries based on information from entryList
+// Journal entry overview Section
+/**
+ * Render preview of journal entries based on information from entryList
+ */
 const renderEntries = (entries) => {
+  // Determines what entries to show based on if filtering 
   if (!filterStatus) {
     entries = entryList
   } else {
     entries = filteredEntries
   }
     entriesContainer.innerHTML="";
-    // Create all entry previews from entryList
     const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
 
+    // Create all entry previews from entryList
     entries.forEach((entry) => {
+      // innerHTML structure adapted from 579 Problem Set 4
       entriesContainer.innerHTML += 
         `
         <div class="position-relative col-12 border border-secondary rounded my-3 p-3 ">
@@ -299,21 +313,26 @@ const renderEntries = (entries) => {
           <h3>${entry.videoGameName}</h3>
           <small class="px-1 text-muted align-self-center">${entry.date}</small>
          </div>
-       <p class="taggedEntry"> ${entry.tags} </p>
+       <p> ${entry.tags} </p>
       <a href='entry.html?id=${entry.id}'><button>View Journal Entry</button></a> 
        </div>`;
       });
-
 }
 
 renderEntries();
 
+// Filtering Journal Entries Section
 
-// Filtering based on tags
 const tagList = ["Played", "Did Not Finish", "Playing", "Watched", "Not Played"]
+
+
+/**
+ * Creates buttons based on tagList and renders to DOM 
+ */
 const renderTagFilters = () => {
   entryFilter.innerHTML = "";
   entryFilter.innerHTML += `<p> Filters </p>`;
+  // Creates a button for each tag in tagList
   tagList.forEach(tag => {
     entryFilter.innerHTML += 
     `<button class="tag-btn" value="${tag}">${tag}</button>`;
@@ -328,15 +347,14 @@ const renderTagFilters = () => {
       filteredEntries = entryList.filter(
         (entry) => entry.tags && entry.tags === selectedTags
       );
-      console.log("Checking entry:", filteredEntries);
       renderEntries(filteredEntries);
     });
+  // Resets filter information to default 
   document.querySelector(".showAll").addEventListener("click", e => {
     filterStatus = false;
     filteredEntries = [];
     renderEntries();
   });
-
   });
 }
 

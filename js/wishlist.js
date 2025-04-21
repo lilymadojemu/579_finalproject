@@ -1,26 +1,31 @@
-// Wishlist Enablement
+// DOM Elements
 const searchForm = document.querySelector("#search");
 const searchInput = document.querySelector("#gameSearch");
 const foundGames = document.querySelector("#foundGames");
 const wishlistContainer = document.querySelector(".wishlistContainer")
 
 let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
-// Have a state for when there are no games in the wishlist
-if (!wishList) {
-  console.log("not wishes")
-}
+
+// Gets the search query/input for the game 
 searchForm.addEventListener("submit", e => {
-    e.preventDefault(); // Stops the form from refreshing the page
-    const searchQuery = searchInput.value.trim(); // Get user input
+    // Stops the form from refreshing the page
+    e.preventDefault(); 
+    const searchQuery = searchInput.value.trim();
     if (searchQuery) {
-      fetchGames(searchQuery); // Pass the search term to the fetch function
+      // Pass the search query to the fetch function
+      fetchGames(searchQuery);
     }
   });
 
+/**
+ * Gets info from RAWG API based on what users is searching for
+ * @param {string} query Search query
+ */
 const fetchGames = (query) => {
     fetch(`https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad&search=${query}&page_size=10`)
     .then(res => res.json())
     .then(data => {
+      console.log(typeof(data.results))
       renderSearchResults(data.results); // Show the games on the page
     })
     .catch(err => {
@@ -28,6 +33,10 @@ const fetchGames = (query) => {
     });
 };
 
+/**
+ * Displays search results from fetchGames(query)
+ * @param {number} results The data of games from fetchGames(query)
+ */
 const renderSearchResults = (results) => {
     foundGames.innerHTML = ""; // Clear any previous results
     foundGames.classList.remove("hidden"); // Make sure the results section is visible
@@ -56,16 +65,17 @@ const renderSearchResults = (results) => {
     });
   };
 
-
+/**
+ * Displays the selected games in the "my wishlist" area
+ */
 const renderWishlist = (wishList) => {
-      // Display the chosen game in the wishlist area
       wishlistContainer.innerHTML = ""
       wishList.forEach((game) => {
         wishlistContainer.innerHTML += `
         <img class="gameImg" src="${game.img}" alt="${game.name}"/>
         <p>${game.name}<p>`
       });
-
+      // Adjusting the size of the images
       document.querySelectorAll(".gameImg").forEach((img) => {
         img.style.width = "500px"
       });
