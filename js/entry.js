@@ -86,10 +86,10 @@ const renderEntry = (matchingEntry) => {
     <section tabindex="0">
       <figure>
         <img src=${matchingEntry.keyImgAddress || defaultImg} alt="">
-        <figcaption>${matchingEntry.keyImgCaption}</figcaption>
+        <figcaption>${matchingEntry.keyMomentImgCaption}</figcaption>
       </figure>
       <h2>Key Moment(s)</h2>
-      <p>${matchingEntry.overallThoughtsParagraph || "No Thoughts"}</p>
+      <p>${matchingEntry.keyMomentParagraph|| "No Thoughts"}</p>
     </section>
 
     <section tabindex="0">
