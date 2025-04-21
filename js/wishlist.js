@@ -1,6 +1,3 @@
-// Add year to the footer
-document.querySelector("#year").innerHTML = new Date().getFullYear();
-
 // Wishlist Enablement
 const searchForm = document.querySelector("#search");
 const searchInput = document.querySelector("#gameSearch");
