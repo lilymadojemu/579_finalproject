@@ -15,7 +15,7 @@
     <!-- Header -->
     <header>
         <a href="#main" id="skip">Skip to main content</a>
-        <h1>Video Game Journal</h1>
+        <h1>My Video Game Journal</h1>
         <!-- navigation -->
         <nav>
             <ul>
@@ -38,142 +38,139 @@
 
         <!-- Journal Entry Form -->
         <article id="guidelines">
-            <section tabindex="0" >
+            <section tabindex="0" class="entryForm">
                 <!-- 
-                Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages
-
-                Example: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form 
-                https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->    
-
-                <form id="journalEntryForm">
-                    <fieldset class="form-group">
-                      <h2><legend>Create Your Journal Entry</legend></h2>
-                      <!-- User Names their journal entry -->
-                      <p>
-                        <label for="journalEntryName"> Journal Entry Title</label>
-                        <input type="text" class="form-control" name="size" id="journalEntryName"/>
-                        <small class="form-text text-muted">Required, Enter the name of your journal entry here</small>
-                        <div class="invalid-feedback">
-                            Journal Entry Title is required
-                         </div>
-                      </p>
-                      <!-- Video Game Information (Stuff that can be fetched to be populated) -->
-                      <p>
-                        <label for="videoGameTitleForm">Video Game Title</label>
-                        <input type="text" class="form-control" name="size" id="videoGameTitleForm" placeholder="Enter title"/>
-                        <small class="form-text text-muted">Required</small>
-                        <div class="invalid-feedback">
-                            Game title is required
-                         </div>
-                      </p>
-                      <p>
-                        <label for="dateEntry">Date</label>
-                        <input type="text" class="form-control" name="dateEntry" id="dateEntryId"/>
-                        <small class="form-text text-muted" >Required</small>
-                        <div class="invalid-feedback">
-                          Date is required
-                        </div>
-                      </p>
-                      <!-- Actual Journal Entry -->
-                        <!-- Overall Thoughts -->
-                        <fieldset class="form-group">
-                            <h3> Overall Thoughts</h3>
-                            <p class="row">
-                                <!-- Image Address-->
-                                <label for="thoughtImg">Image Address/URL </label>
-                                <input type="text" class="form-control" name="thoughtImg" id="thoughtImgId"/>
-                                <small class="text-muted">Optional, Img Address of picture representing your overall thoughts of your game</small>
-                                <div class="invalid-feedback">
-                                  Invalid Image Address
-                                </div>
-                                <!-- Image Caption Input -->
-                                <label for="thoughtImgCaption">Image Caption</label>
-                                <input type="text" class="form-control" name="thoughtImgCaption" id="thoughtImgCaptionId"/>
-                                <small class="text-muted">Optional, Caption of provided image</small>
-
-                            </p>
-                            <p>
-                                <!-- Overall Thoughts paragraph -->
-                                <label for="overallThoughtsParagraph">Overarching Thoughts</label>
-                                <textarea class="form-control" name="overallThoughtsParagraph" id="overallThoughtsParagraphId"></textarea>
-                                <small class="text-muted">Required</small>
-                                <div class="invalid-feedback">
-                                  Your overall thoughts is required.
-                                </div>
-                            </p>
-                        </fieldset>
-    
-                        <!-- Key Moment(s) -->
-                        <fieldset class="form-group">
-                            <h3> Key Moments</h3>
-                            <p> Let's talk about some of your favorite moments of the video game!</p>
-                            
-                            <!-- key moments sections introductory text -->
-                            <p  class="row">
-                                <!-- Key Moment(s) Image & Caption -->
-                                <!-- Image Address-->
-                                <label for="keyImg">Image Address/URL </label>
-                                <input type="text" class="form-control" name="keyImg" id="keyImgId"/>
-                                <small class="text-muted">Optional, Image Address/URL of picture representing a key moment of the video game</small>
-                                <div class="invalid-feedback">
-                                  Invalid Image Address
-                                </div>
-                                <!-- Image Caption Input -->
-                                <label for="keyImgCaption">Image Caption</label>
-                                <input type="text" name="keyImgCaption" id="keyImgCaptionId" placeholder="Caption"/>
-                                <small class="text-muted">Optional, Caption of provided image</small>
-
-                            </p>
-                            <p>
-                                <!-- Key Moment(s) paragraph -->
-                                <label for="keyParagraph">Key Moment Entry</label>
-                                <textarea class="form-control" name="keyParagraph" id="keyParagraphId"></textarea>
-                            </p>
-                        </fieldset>
-    
-                        <!-- Conclusion -->
-                        <fieldset class="form-group">
-                            <h3> Conclusion</h2>
-                            <p>What are your final thoughts on this game?</p>
-
-                            <p class="row">
-                                <!-- Conclusion Image & Caption -->
-                                <label for="conclusionImg">Image Address/URL</label>
-                                <input type="text" class="form-control" name="conclusionImg" id="conclusionImgId"/>
-                                <small class="text-muted">Optional, Img Address of picture representing your concluding thoughts</small>
-                                <div class="invalid-feedback">
-                                  Invalid Image Address
-                                </div>
-                                <!-- Image Caption Input -->
-                                <label for="conclusionImageCaption">Image Caption</label>
-                                <input type="text" name="conclusionImgCaption" id="conclusionImgCaptionId"/>
-                                <small class="text-muted">Optional, Caption of provided image</small>
-                            </p>
-                            <p>
-                                <!-- Conclusion paragraph -->
-                                <label for="conclusionParagraph">Concluding Thoughts</label>
-                                <textarea class="form-control" name="conclusionParagraph" id="conclusionParagraphId"></textarea>
-                                <small class="text-muted">Required</small>
-                                <div class="invalid-feedback">
-                                  Concluding Thoughts are required.
-                                </div>
-                            </p>
-                        </fieldset>
-                        <!-- Select to choose tags associated with this game -->
-                        <div class="form-group">
-                            <label for="entryTags">Tags</label>
-                            <select class="form-control" id="entryTags">
-                              <option>Played</option>
-                              <option>Did Not Finish</option>
-                              <option>Playing</option>
-                              <option>Watched</option>
-                              <option>Not Played</option>
-                            </select>
+                Explanation: User inputs are captured/saved to local storage for display on the overview and individual entry pages -->
+                  <form id="journalEntryForm" class="container">
+                      <fieldset class="form-group w-75">
+                        <h2><legend>Create Your Journal Entry</legend></h2>
+                        <!-- User Names their journal entry -->
+                        <p class="form-group">
+                          <label for="journalEntryName"> Journal Entry Title</label>
+                          <input type="text" class="form-control" name="size" id="journalEntryName"/>
+                          <small class="form-text text-muted">Required, Enter the name of your journal entry here</small>
+                          <div class="invalid-feedback">
+                              Journal Entry Title is required
                           </div>
-                    </fieldset>
-                    <!-- When clicked, get form information and save it to local storage -->
-                    <input type="submit" id="formSubmit" value="Submit">
-                  </form>              
+                        </p>
+                        <!-- Video Game Information (Stuff that can be fetched to be populated) -->
+                        <p class="form-group">
+                          <label for="videoGameTitleForm">Video Game Title</label>
+                          <input type="text" class="form-control" name="size" id="videoGameTitleForm"/>
+                          <small class="form-text text-muted">Required</small>
+                          <div class="invalid-feedback">
+                              Game title is required
+                          </div>
+                        </p>
+                        <p>
+                          <label for="dateEntry">Date</label>
+                          <input type="text" class="form-control" name="dateEntry" id="dateEntryId"/>
+                          <small class="form-text text-muted" >Required</small>
+                          <div class="invalid-feedback">
+                            Date is required
+                          </div>
+                        </p>
+                        <!-- Actual Journal Entry -->
+                          <!-- Overall Thoughts -->
+                          <fieldset class="form-group">
+                              <h3> Overall Thoughts</h3>
+                              <p class="row">
+                                  <!-- Image Address-->
+                                  <label for="thoughtImg">Image Address/URL </label>
+                                  <input type="text" class="form-control" name="thoughtImg" id="thoughtImgId"/>
+                                  <small class="text-muted">Optional, Img Address of picture representing your overall thoughts of your game</small>
+                                  <div class="invalid-feedback">
+                                    Invalid Image Address
+                                  </div>
+                                  <!-- Image Caption Input -->
+                                  <label for="thoughtImgCaption">Image Caption</label>
+                                  <input type="text" class="form-control" name="thoughtImgCaption" id="thoughtImgCaptionId"/>
+                                  <small class="text-muted">Optional, Caption of provided image</small>
+
+                              </p>
+                              <p>
+                                  <!-- Overall Thoughts paragraph -->
+                                  <label for="overallThoughtsParagraph">Overarching Thoughts</label>
+                                  <textarea class="form-control" name="overallThoughtsParagraph" id="overallThoughtsParagraphId"></textarea>
+                                  <small class="text-muted">Required</small>
+                                  <div class="invalid-feedback">
+                                    Your overall thoughts is required.
+                                  </div>
+                              </p>
+                          </fieldset>
+      
+                          <!-- Key Moment(s) -->
+                          <fieldset class="form-group">
+                              <h3> Key Moments</h3>
+                              <p> Let's talk about some of your favorite moments of the video game!</p>
+                              
+                              <!-- key moments sections introductory text -->
+                              <p  class="row">
+                                  <!-- Key Moment(s) Image & Caption -->
+                                  <!-- Image Address-->
+                                  <label for="keyImg">Image Address/URL </label>
+                                  <input type="text" class="form-control" name="keyImg" id="keyImgId"/>
+                                  <small class="text-muted">Optional, Image Address/URL of picture representing a key moment of the video game</small>
+                                  <div class="invalid-feedback">
+                                    Invalid Image Address
+                                  </div>
+                                  <!-- Image Caption Input -->
+                                  <label for="keyImgCaption">Image Caption</label>
+                                  <input type="text" name="keyImgCaption" id="keyImgCaptionId" />
+                                  <small class="text-muted">Optional, Caption of provided image</small>
+
+                              </p>
+                              <p>
+                                  <!-- Key Moment(s) paragraph -->
+                                  <label for="keyParagraph">Key Moment Entry</label>
+                                  <textarea class="form-control" name="keyParagraph" id="keyParagraphId"></textarea>
+                              </p>
+                          </fieldset>
+      
+                          <!-- Conclusion -->
+                          <fieldset class="form-group">
+                              <h3> Conclusion</h2>
+                              <p>What are your final thoughts on this game?</p>
+
+                              <p class="row">
+                                  <!-- Conclusion Image & Caption -->
+                                  <label for="conclusionImg">Image Address/URL</label>
+                                  <input type="text" class="form-control" name="conclusionImg" id="conclusionImgId"/>
+                                  <small class="text-muted">Optional, Img Address of picture representing your concluding thoughts</small>
+                                  <div class="invalid-feedback">
+                                    Invalid Image Address
+                                  </div>
+                                  <!-- Image Caption Input -->
+                                  <label for="conclusionImageCaption">Image Caption</label>
+                                  <input type="text" name="conclusionImgCaption" id="conclusionImgCaptionId"/>
+                                  <small class="text-muted">Optional, Caption of provided image</small>
+                              </p>
+                              <p>
+                                  <!-- Conclusion paragraph -->
+                                  <label for="conclusionParagraph">Concluding Thoughts</label>
+                                  <textarea class="form-control" name="conclusionParagraph" id="conclusionParagraphId"></textarea>
+                                  <small class="text-muted">Required</small>
+                                  <div class="invalid-feedback">
+                                    Concluding Thoughts are required.
+                                  </div>
+                              </p>
+                          </fieldset>
+                          <!-- Select to choose tags associated with this game -->
+                          <div class="form-group">
+                              <label for="entryTags">Tags</label>
+                              <select class="form-control" id="entryTags">
+                                <option>Played</option>
+                                <option>Did Not Finish</option>
+                                <option>Playing</option>
+                                <option>Watched</option>
+                                <option>Not Played</option>
+                              </select>
+                            </div>
+                      </fieldset>
+                      <!-- When clicked, get form information and save it to local storage -->
+                      <input type="submit" id="formSubmit" value="Submit">
+                    </form>  
+                  </div>            
             </section>
         </article>
         <article id="guidelines">

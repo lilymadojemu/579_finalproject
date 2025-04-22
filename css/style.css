@@ -76,3 +76,17 @@ figure > img, figcaption {
     height: 60%;
     width: 30%;
 }
+
+
+form {
+    display: inline-block; 
+}
+
+.entryForm {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+form {
+    grid-column: 2;
+}

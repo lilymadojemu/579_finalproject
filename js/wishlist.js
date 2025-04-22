@@ -1,9 +1,10 @@
-// DOM Elements
+// DOM Elements from wishlist.html
 const searchForm = document.querySelector("#search");
 const searchInput = document.querySelector("#gameSearch");
 const foundGames = document.querySelector("#foundGames");
 const wishlistContainer = document.querySelector(".wishlistContainer")
 
+// Getting wishlist from local storage if it exists, else empty list
 let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
 
 // Gets the search query/input for the game 
