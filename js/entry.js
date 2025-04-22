@@ -97,6 +97,7 @@ const renderEntry = (matchingEntry) => {
   }
 
   document.querySelector(".entryHeader h1").innerHTML = matchingEntry.entryTitle;
+  // Fallback image used if an entry is missing an image
   const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
   
   // Adding entry information onto the page
@@ -128,6 +129,6 @@ const renderEntry = (matchingEntry) => {
       paragraph: matchingEntry.conclusionParagraph
     });
   };
-  
+
 // Renders chosen journal entry onto the page
 renderEntry(matchingEntry);
