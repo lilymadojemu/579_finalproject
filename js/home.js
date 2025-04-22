@@ -311,7 +311,7 @@ const renderEntries = (entries) => {
           <img class="entryImg" src=${entry.overallThoughtsImg || defaultImg} alt="">
          <div class="d-flex">
           <h3>${entry.videoGameName}</h3>
-          <small class="px-1 text-muted align-self-center">${entry.date}</small>
+          <small class="px-1  align-self-center">${entry.date}</small>
          </div>
        <p> ${entry.tags} </p>
       <a href='entry.html?id=${entry.id}'><button>View Journal Entry</button></a> 

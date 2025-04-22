@@ -43,20 +43,41 @@ const defaultEntries = [
 const urlParams = new URLSearchParams(window.location.search);
 // This is the unique ID for the journal entry
 const entryId = urlParams.get("id");
-// Get the list of entries from local storage
+// Get the list of journal entries the user created from local storage
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
 // Save default entries to localStorage if entry.list doesn't already exist
 if (!localStorage.getItem("entry.list")) {
     localStorage.setItem("entry.list", JSON.stringify(defaultEntries));
 }
-// Ensure that the url id matches an id in entry list
+// Finds a specific entry in the entryList array whose id matches a given entryId
 const matchingEntry = entryList.find(entry => entry.id === Number(entryId));
 
 // DOM Elements from entry page
 const journalEntry = document.querySelector("#entryContainer")
 const moreEntries = document.querySelector("#otherEntries")
 
-// Displaying information from local storage onto page for specific entry
+/**
+ * Creates a standardized HTML section block with optional image, caption, and paragraph content.
+ * From chatgpt: https://chatgpt.com/share/6807bbd0-473c-8009-a182-9082acda3b7a
+*/
+const createSection = ({ title, img, caption, paragraph }) => {
+  return `
+    <section>
+      ${img ? `
+        <figure>
+          <img src="${img}" alt="">
+          <figcaption>${caption || ""}</figcaption>
+        </figure>` : ""}
+      <h2>${title}</h2>
+      <p>${paragraph || "No Thoughts"}</p>
+    </section>
+  `;
+};
+
+/**
+ * Displays information from local storage onto page for specific entry
+ * @param {Object} matchingEntry - The content of a specific entry in local storage.
+*/
 const renderEntry = (matchingEntry) => {
   if (!matchingEntry) {
     // Handle case where ID doesn't match any entry 
@@ -68,48 +89,33 @@ const renderEntry = (matchingEntry) => {
   document.querySelector(".entryHeader h1").innerHTML = matchingEntry.entryTitle;
   const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
 
-  journalEntry.innerHTML += 
-  `      
-    <section tabindex="0" class="introduction">
+  journalEntry.innerHTML += `      
+    <section class="introduction">
       <h2>${matchingEntry.videoGameName}</h2>
       <p>${matchingEntry.date}</p>
       <p>${matchingEntry.tags}</p>
     </section>
-
-    <section tabindex="0">
-      <figure>
-        <img src=${matchingEntry.overallThoughtsImg|| defaultImg} alt="">
-        <figcaption>${matchingEntry.overallThoughtsImgCaption}</figcaption>
-      </figure>
-      <h2>Overall Thoughts</h2>
-      <p>${matchingEntry.overallThoughtsParagraph || "No Thoughts"}</p>
-    </section>
-
-    <section tabindex="0">
-      <h2>Key Moments </h2>
-      <figure>
-        <img src=${matchingEntry.keyMomentImg|| defaultImg} alt="">
-        <figcaption>${matchingEntry.keyMomentImgCaption}</figcaption>
-      </figure>
-      <p>${matchingEntry.keyMomentParagraph|| "No Thoughts"}</p>
-    </section>
-
-    <section tabindex="0">
-      <h2>Conclusion</h2>
-
-      <figure>
-        <img src=${matchingEntry.conclusionImg|| defaultImg} alt="">
-        <figcaption>${matchingEntry.conclusionImgCaption}</figcaption>
-      </figure>
-      <p>${matchingEntry.conclusionParagraph || "No Thoughts"}</p>
-    </section>
     ` 
-    document.querySelectorAll("img").style.margin = "0 auto"
+    journalEntry.innerHTML += createSection({
+      title: "Overall Thoughts",
+      img: matchingEntry.overallThoughtsImg || defaultImg,
+      caption: matchingEntry.overallThoughtsImgCaption,
+      paragraph: matchingEntry.overallThoughtsParagraph
+    });
+
+    journalEntry.innerHTML += createSection({
+      title: "Key Moments",
+      img: matchingEntry.keyMomentImg || defaultImg,
+      caption: matchingEntry.keyMomentImgCaption,
+      paragraph: matchingEntry.keyMomentParagraph
+    });
+  
+    journalEntry.innerHTML += createSection({
+      title: "Conclusion",
+      img: matchingEntry.conclusionImg || defaultImg,
+      caption: matchingEntry.conclusionImgCaption,
+      paragraph: matchingEntry.conclusionParagraph
+    });
   };
 
 renderEntry(matchingEntry);
-
-// Show a preview of the entries that the user has recently made
-const viewRecentEntries = () => {
-  moreEntries.innerHTML="";
-};
