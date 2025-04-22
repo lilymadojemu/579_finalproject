@@ -41,7 +41,7 @@ const defaultEntries = [
 
 // Grabbing the unique journal entry id from the search URL
 const urlParams = new URLSearchParams(window.location.search);
-// This is the unique ID for the journal entry
+// This is the unique ID for the journal entry taken from the search URL
 const entryId = urlParams.get("id");
 // Get the list of journal entries the user created from local storage
 let entryList = localStorage.getItem('entry.list') ? JSON.parse(localStorage.getItem('entry.list')) : defaultEntries;
@@ -54,11 +54,20 @@ const matchingEntry = entryList.find(entry => entry.id === Number(entryId));
 
 // DOM Elements from entry page
 const journalEntry = document.querySelector("#entryContainer")
-const moreEntries = document.querySelector("#otherEntries")
 
 /**
  * Creates a standardized HTML section block with optional image, caption, and paragraph content.
- * From chatgpt: https://chatgpt.com/share/6807bbd0-473c-8009-a182-9082acda3b7a
+ * 
+ * @param {string} title
+ * Section name on the entry page
+ * @param {string} img
+ * The value of image URL input.
+ * @param {string} caption
+ * The value of caption input.
+ * @param {string} paragraph
+ * The value of paragraph input.
+ * 
+ * Function created by Chatgpt: https://chatgpt.com/share/6807bbd0-473c-8009-a182-9082acda3b7a
 */
 const createSection = ({ title, img, caption, paragraph }) => {
   return `
@@ -75,12 +84,13 @@ const createSection = ({ title, img, caption, paragraph }) => {
 };
 
 /**
- * Displays information from local storage onto page for specific entry
- * @param {Object} matchingEntry - The content of a specific entry in local storage.
+ * Displays information from local storage onto the page for a specific journal entry.
+ * @param {Object} matchingEntry 
+ * The journal entry object from local storage whose ID matches the ID in the URL.
 */
 const renderEntry = (matchingEntry) => {
   if (!matchingEntry) {
-    // Handle case where ID doesn't match any entry 
+    // Handles case where ID doesn't match any entry 
     console.error("No entry found with ID:", entryId);
     journalEntry.innerHTML = "<p>Entry not found.</p>";
     return;
@@ -88,7 +98,8 @@ const renderEntry = (matchingEntry) => {
 
   document.querySelector(".entryHeader h1").innerHTML = matchingEntry.entryTitle;
   const defaultImg = "https://cdn.shopify.com/s/files/1/1083/2612/files/mymelody2_480x480.png?v=1721111506"
-
+  
+  // Adding entry information onto the page
   journalEntry.innerHTML += `      
     <section class="introduction">
       <h2>${matchingEntry.videoGameName}</h2>
@@ -117,5 +128,6 @@ const renderEntry = (matchingEntry) => {
       paragraph: matchingEntry.conclusionParagraph
     });
   };
-
+  
+// Renders chosen journal entry onto the page
 renderEntry(matchingEntry);
