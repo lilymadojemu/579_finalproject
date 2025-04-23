@@ -1,33 +1,38 @@
 // DOM Elements from wishlist.html
+// Form for submitting search query
 const searchForm = document.querySelector("#search");
+// Input field for the game search query
 const searchInput = document.querySelector("#gameSearch");
+// Container for displaying search results
 const foundGames = document.querySelector("#foundGames");
+// Container for displaying the wishlist
 const wishlistContainer = document.querySelector(".wishlistContainer")
 
 // Getting wishlist from local storage if it exists, else empty list
 let wishList = localStorage.getItem("wish.list") ? JSON.parse(localStorage.getItem("wish.list")) : [];
 
-// Gets the search query/input for the game 
+// Captures the search query from the user input and triggers the fetch request
 searchForm.addEventListener("submit", e => {
-    // Stops the form from refreshing the page
+    // Prevents form from refreshing the page
     e.preventDefault(); 
     const searchQuery = searchInput.value.trim();
     if (searchQuery) {
-      // Pass the search query to the fetch function
+      // Pass the search query to the fetch function to retrieve game data
       fetchGames(searchQuery);
     }
   });
 
 /**
- * Gets info from RAWG API based on what users is searching for
- * @param {string} query Search query
+ * Gets info from RAWG API based on what user search input.
+ * @param {string} query 
+ * The search query entered by the user.
  */
 const fetchGames = (query) => {
     fetch(`https://api.rawg.io/api/games?key=6b0a81daa54e4f359c511cc27e0d57ad&search=${query}&page_size=10`)
     .then(res => res.json())
     .then(data => {
-      console.log(typeof(data.results))
-      renderSearchResults(data.results); // Show the games on the page
+      // Show the games on the page
+      renderSearchResults(data.results); 
     })
     .catch(err => {
       console.error('Error fetching games:', err);
@@ -35,8 +40,9 @@ const fetchGames = (query) => {
 };
 
 /**
- * Displays search results from fetchGames(query)
- * @param {number} results The data of games from fetchGames(query)
+ * Displays search results from fetchGames(query) and allows users to add games to their wishlist
+ * @param {Array<Object>} results 
+ * An array of game objects returned from fetchGames(query)
  */
 const renderSearchResults = (results) => {
     foundGames.innerHTML = ""; // Clear any previous results
@@ -67,7 +73,7 @@ const renderSearchResults = (results) => {
   };
 
 /**
- * Displays the selected games in the "my wishlist" area
+ * Renders the user's selected games in the "My Wishlist" section.
  */
 const renderWishlist = (wishList) => {
       wishlistContainer.innerHTML = ""
@@ -82,4 +88,5 @@ const renderWishlist = (wishList) => {
       });
 };
 
+// Renders wishlist onto the page
 renderWishlist(wishList);
