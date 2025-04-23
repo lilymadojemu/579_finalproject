@@ -116,7 +116,7 @@ const renderEntry = (matchingEntry) => {
     });
 
     journalEntry.innerHTML += createSection({
-      title: "Key Moments",
+      title: "Key Moment(s)",
       img: matchingEntry.keyMomentImg || defaultImg,
       caption: matchingEntry.keyMomentImgCaption,
       paragraph: matchingEntry.keyMomentParagraph
